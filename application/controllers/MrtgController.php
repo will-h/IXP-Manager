@@ -102,9 +102,14 @@ class MrtgController extends IXP_Controller_AuthRequiredAction
 
         $this->getLogger()->debug( "Serving {$filename} to {$this->getUser()->getUsername()}" );
 
-        if( @readfile( $filename ) === false )
+        // MRTG graph delivery can be disabled in dev environments when not available
+        $mrtg_disabled = isset( $this->_options['mrtg']['disabled'] ) && $this->_options['mrtg']['disabled'];
+
+        if( $mrtg_disabled || @readfile( $filename ) === false )
         {
-            $this->getLogger()->notice( "Could not load {$filename} for mrtg/retrieveImageAction" );
+            if( !$mrtg_disabled )
+                $this->getLogger()->notice( "Could not load {$filename} for mrtg/retrieveImageAction" );
+            
             @readfile(
                 APPLICATION_PATH . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
                     . 'public' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR
@@ -149,9 +154,14 @@ class MrtgController extends IXP_Controller_AuthRequiredAction
         
         $this->getLogger()->debug( "Serving P2P $filename to {$this->getUser()->getUsername()}" );
 
-        if( @readfile( $filename ) === false )
+        // MRTG graph delivery can be disabled in dev environments when not available
+        $mrtg_disabled = isset( $this->_options['mrtg']['disabled'] ) && $this->_options['mrtg']['disabled'];
+        
+        if( $mrtg_disabled || @readfile( $filename ) === false )
         {
-            $this->getLogger()->notice( 'Could not load ' . $filename . ' for mrtg/retrieveImageAction' );
+            if( !$mrtg_disabled )
+                $this->getLogger()->notice( 'Could not load ' . $filename . ' for mrtg/retrieveImageAction' );
+            
             @readfile(
                 APPLICATION_PATH . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
                     . 'public' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR

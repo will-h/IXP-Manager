@@ -215,6 +215,13 @@ class IXP_Mrtg
      */
     function __construct( $file = null )
     {
+        OSS_Debug::dd( Zend_Registry::get( 'options' ) );
+        if( $options = Zend_Registry::get( 'options' ) )
+        {
+            if( isset( $options['mrtg']['disabled'] ) && $options['mrtg']['disabled'] )
+                return;
+        }
+        
         $this->file = $file;
         $this->loadmrtgfile();
     }
