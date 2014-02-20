@@ -9,6 +9,32 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PatchPanel
 {
+
+
+    const MEDIUM_UTP        = 'utp';
+    const MEDIUM_SMF        = 'smf';
+    const MEDIUM_MMF        = 'mmf';
+    const MEDIUM_MIXED      = 'mixed';
+    
+    public static $MEDIA = [
+        self::MEDIUM_UTP        => 'UTP',
+        self::MEDIUM_SMF        => 'SMF',
+        self::MEDIUM_MMF        => 'MMF',
+        self::MEDIUM_MIXED      => 'Mixed'
+    ];
+
+    const CONNECTOR_RJ45    = 'RJ45';
+    const CONNECTOR_SC      = 'SC';
+    const CONNECTOR_LC      = 'LC';
+    const CONNECTOR_MU      = 'MU';
+
+    public static $CONNECTORS = [
+        self::CONNECTOR_RJ45   => 'RJ45',
+        self::CONNECTOR_SC     => 'SC',
+        self::CONNECTOR_LC     => 'LC',
+        self::CONNECTOR_MU     => 'MU',
+    ];
+
     /**
      * @var string
      */
