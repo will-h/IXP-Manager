@@ -46,6 +46,13 @@ class IXP_Form_PatchPanel extends IXP_Form
 
         $this->addElement( IXP_Form_Cabinet::getPopulatedSelect( 'cabinetid' ) );
 
+        $numports = $this->createElement( 'text', 'numports' );
+        $numports->addValidator( 'between', false, array( 1, 1024 ) )
+            ->setAttrib( 'class', 'span3' )
+            ->setLabel( 'Number of Ports' )
+            ->addFilter( new OSS_Filter_StripSlashes() );
+        $this->addElement( $numports );
+
         $medium = $this->createElement( 'select', 'medium' );
         $medium->setMultiOptions( \Entities\PatchPanel::$MEDIA )
             ->setAttrib( 'class', 'span3 chzn-select' )

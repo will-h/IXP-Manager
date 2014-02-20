@@ -198,6 +198,45 @@ class PatchPanelController extends IXP_Controller_FrontEnd
     }
 
     /**
+     * Post database flush hook that can be overridden by subclasses for add and edit.
+     *
+     * This is called if the user POSTs a valid form after the posted
+     * data has been flushed to the database.
+     *
+     * If you return `false`, the the standard log and OSS_Message will not be
+     * created / displayed and a `redirect()` will not be performed.
+     *
+     * NB: also calls `postFlush()`
+     *
+     * @param OSS_Form $form The Send form object
+     * @param object $object The Doctrine2 entity (being edited or blank for add)
+     * @param bool $isEdit True if we are editing, otherwise false
+     * @return bool If false, supress standard log and OSS_Message and the redirection
+     */
+    protected function addPostFlush( $form, $object, $isEdit )
+    {
+        // add the ports
+        for( $i = 1; $i <= $form->getValue( 'numports'); $i++ )
+        {
+            $ppp = new Entities\PatchPanelPort;
+            $ppp->setPatchPanel( $object );
+            $ppp->setPosition( $i );
+            $ppp->setMedium( $object->getMedium() );
+            $ppp->setConnector( $object->getConnector() );
+            $ppp->setAvailableForUse( true );
+            $ppp->setDuplex( 0 );
+            $ppp->setColoReference( '' );
+            $ppp->setNotes( '' );
+            $ppp->setDeleted( false );
+            $this->getD2EM()->persist( $ppp );
+        }
+
+        $this->getD2EM()->flush();
+
+        return $this->postFlush( $object );
+    }
+
+    /**
      * Function which can be over-ridden to perform any pre-deletion tasks
      *
      * You can stop the deletion by returning false but you should also add a
