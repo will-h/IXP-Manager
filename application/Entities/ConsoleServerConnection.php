@@ -332,4 +332,49 @@ class ConsoleServerConnection
     {
         return $this->PatchPanelPortObject;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $PatchPanelPortObjects;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->PatchPanelPortObjects = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add PatchPanelPortObjects
+     *
+     * @param \Entities\PatchPanelPortObject $patchPanelPortObjects
+     * @return ConsoleServerConnection
+     */
+    public function addPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->PatchPanelPortObjects[] = $patchPanelPortObjects;
+    
+        return $this;
+    }
+
+    /**
+     * Remove PatchPanelPortObjects
+     *
+     * @param \Entities\PatchPanelPortObject $patchPanelPortObjects
+     */
+    public function removePatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->PatchPanelPortObjects->removeElement($patchPanelPortObjects);
+    }
+
+    /**
+     * Get PatchPanelPortObjects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPatchPanelPortObjects()
+    {
+        return $this->PatchPanelPortObjects;
+    }
 }

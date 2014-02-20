@@ -167,29 +167,51 @@ class CustomerEquipment
     /**
      * @var \Entities\PatchPanelPortObject
      */
-    private $PatchPanelPortObject;
 
 
     /**
-     * Set PatchPanelPortObject
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $PatchPanelPortObjects;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->PatchPanelPortObjects = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add PatchPanelPortObjects
      *
-     * @param \Entities\PatchPanelPortObject $patchPanelPortObject
+     * @param \Entities\PatchPanelPortObject $patchPanelPortObjects
      * @return CustomerEquipment
      */
-    public function setPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObject = null)
+    public function addPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
     {
-        $this->PatchPanelPortObject = $patchPanelPortObject;
+        $this->PatchPanelPortObjects[] = $patchPanelPortObjects;
     
         return $this;
     }
 
     /**
-     * Get PatchPanelPortObject
+     * Remove PatchPanelPortObjects
      *
-     * @return \Entities\PatchPanelPortObject 
+     * @param \Entities\PatchPanelPortObject $patchPanelPortObjects
      */
-    public function getPatchPanelPortObject()
+    public function removePatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
     {
-        return $this->PatchPanelPortObject;
+        $this->PatchPanelPortObjects->removeElement($patchPanelPortObjects);
+    }
+
+    /**
+     * Get PatchPanelPortObjects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPatchPanelPortObjects()
+    {
+        return $this->PatchPanelPortObjects;
     }
 }

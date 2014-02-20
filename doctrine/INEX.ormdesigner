@@ -978,7 +978,6 @@
       <field name="deleted" type="boolean" default="0" required="true" uuid="aed8a302-db99-43f5-9b27-c74bee1ad790"/>
       <field name="deleted_on" type="datetime" uuid="7e279f10-f5aa-45a1-8884-2eb2f69e0d1b"/>
       <field name="patch_panel_id" type="integer" required="true" uuid="7d98fca3-8ede-4f6a-846f-4321a5114457"/>
-      <field name="port_object_id" type="integer" required="true" unique="true" uuid="72019be5-4197-4e75-bd40-f1818afec375"/>
       <orm-attributes>
         <attribute name="table">patch_panel_port</attribute>
         <attribute name="tableName">patch_panel_port</attribute>
@@ -988,32 +987,33 @@
     <association from="PatchPanelPort" to="PatchPanel" owner-alias="PatchPanelPorts" inverse-alias="PatchPanel" uuid="bf0010ea-05f6-4c66-8319-355a6ed43502">
       <association-field from="patch_panel_id" to="id"/>
     </association>
-    <association from="PatchPanelPort" to="PatchPanelPortObject" owner-alias="PatchPort" inverse-alias="Object" uuid="b5d2a344-99c9-4bd6-90e8-3b6256f53ea5">
-      <association-field from="port_object_id" to="id"/>
-    </association>
     <entity name="PatchPanelPortObject" uuid="388dcff2-156e-4396-828b-98714f211617">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="5d8651b3-8807-483f-a9ba-5be686eebaf1"/>
-      <field name="console_server_connection_id" type="integer" required="true" unique="true" uuid="f7700404-83f5-4b33-a2e4-4ec0fbc97d97"/>
-      <field name="customer_equipment_id" type="integer" required="true" unique="true" uuid="ab3a5d4c-91a3-4e53-8750-0c4d710f88eb"/>
-      <field name="patch_panel_port_id" type="integer" required="true" unique="true" uuid="727da07d-a215-4274-ab1b-c777c25c1a58"/>
-      <field name="switch_port_id" type="integer" required="true" unique="true" uuid="24534b54-b277-4dd7-b8a8-090503291011"/>
+      <field name="console_server_connection_id" type="integer" required="true" uuid="f7700404-83f5-4b33-a2e4-4ec0fbc97d97"/>
+      <field name="customer_equipment_id" type="integer" required="true" uuid="ab3a5d4c-91a3-4e53-8750-0c4d710f88eb"/>
+      <field name="switch_port_id" type="integer" required="true" uuid="24534b54-b277-4dd7-b8a8-090503291011"/>
+      <field name="patch_panel_port_id" type="integer" required="true" uuid="4185a63a-73af-43f9-afd4-ea1b2dc8f579"/>
+      <field name="port_id" type="integer" required="true" unique="true" uuid="89b0336f-2e6f-4c05-9226-aa66bba310b6"/>
       <orm-attributes>
         <attribute name="table">patch_panel_port_object</attribute>
         <attribute name="tableName">patch_panel_port_object</attribute>
         <attribute name="repository-class">Repositories\PatchPanelPortObject</attribute>
       </orm-attributes>
     </entity>
-    <association from="PatchPanelPortObject" to="ConsoleServerConnection" owner-alias="PatchPanelPortObject" inverse-alias="ConsoleServerConnection" uuid="5d022f84-77a5-447a-b8ca-e3c247094e74">
+    <association from="PatchPanelPortObject" to="ConsoleServerConnection" owner-alias="PatchPanelPortObjects" inverse-alias="ConsoleServerConnection" uuid="5d022f84-77a5-447a-b8ca-e3c247094e74">
       <association-field from="console_server_connection_id" to="id"/>
     </association>
-    <association from="PatchPanelPortObject" to="CustomerEquipment" owner-alias="PatchPanelPortObject" inverse-alias="CustomerEquipment" uuid="c7ac0bf8-79e8-436c-83ae-f77569a7d982">
+    <association from="PatchPanelPortObject" to="CustomerEquipment" owner-alias="PatchPanelPortObjects" inverse-alias="CustomerEquipment" uuid="c7ac0bf8-79e8-436c-83ae-f77569a7d982">
       <association-field from="customer_equipment_id" to="id"/>
     </association>
-    <association from="PatchPanelPortObject" to="PatchPanelPort" owner-alias="PatchPanelPortObject" inverse-alias="PatchPanelPort" uuid="35bc7af9-b685-4456-a415-e91f74ee785a">
+    <association from="PatchPanelPortObject" to="SwitchPort" owner-alias="PatchPanelPortObjects" inverse-alias="SwitchPort" uuid="912bcd0c-6fd6-486f-840c-05be8029c3ae">
+      <association-field from="switch_port_id" to="id"/>
+    </association>
+    <association from="PatchPanelPortObject" to="PatchPanelPort" owner-alias="PatchPanelPortObjects" inverse-alias="PatchPanelPort" uuid="9e4f9c71-2104-46c4-8ac5-becd5a874514">
       <association-field from="patch_panel_port_id" to="id"/>
     </association>
-    <association from="PatchPanelPortObject" to="SwitchPort" owner-alias="PatchPanelPortObject" inverse-alias="SwitchPort" uuid="912bcd0c-6fd6-486f-840c-05be8029c3ae">
-      <association-field from="switch_port_id" to="id"/>
+    <association from="PatchPanelPortObject" to="PatchPanelPort" owner-alias="ConnectionProxy" inverse-alias="Port" uuid="16178591-bc44-4a9f-9ba1-9553c19295c0">
+      <association-field from="port_id" to="id"/>
     </association>
     <orm-attributes>
       <attribute name="namespace">Entities</attribute>
@@ -1034,16 +1034,16 @@
     <association uuid="13336efb-0945-455d-936c-1f8e625e430f" splitted="1"/>
     <entity uuid="13cd2e44-8bf8-41d0-b105-7ae62dc1d189" position-x="1417" position-y="16" size-x="0" size-x2="119" size-y="0" size-y2="129"/>
     <association uuid="15b1d11f-9a03-4772-a3cf-c984cd801d7a" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0"/>
+    <association uuid="16178591-bc44-4a9f-9ba1-9553c19295c0" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0"/>
     <entity uuid="1b90f411-dfed-48a8-acd0-97cbf599e069" position-x="1264" position-y="170" size-x="0" size-x2="119" size-y="0" size-y2="115"/>
     <association uuid="1eba91d3-a283-42e2-8ae4-45163c1ea622" splitted="1"/>
     <association uuid="212269bb-5626-4a46-b864-1a94ecee88f3" center-position-x="-5" center-position-y="0" splitted="1"/>
     <entity uuid="274aaa49-9d19-4458-8f91-386f5b9a44cd" position-x="1165" position-y="8" size-x="0" size-x2="106" size-y="0" size-y2="59"/>
     <entity uuid="28b1e175-e09d-4f09-912b-326de7d4d5d8" position-x="432" position-y="192" size-x="0" size-x2="121" size-y="0" size-y2="171"/>
     <entity uuid="2bc6f199-c9b6-4ee7-aba0-7aa9856b7291" position-x="861" position-y="-161" size-x="0" size-x2="135" size-y="0" size-y2="227"/>
-    <association uuid="35bc7af9-b685-4456-a415-e91f74ee785a" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" splitted="1"/>
     <entity uuid="3768242c-d7a1-4d2a-8aab-9a0b4e6a0a10" position-x="1395" position-y="396" size-x="0" size-x2="109" size-y="0" size-y2="59"/>
     <association uuid="3841a332-222d-4dfa-8ef2-775e8bdb0287" caption1-position-x="0" caption1-position-y="0" center-position-x="1" center-position-y="0" splitted="1"/>
-    <entity uuid="388dcff2-156e-4396-828b-98714f211617" position-x="-15" position-y="-333" size-x="0" size-x2="181" size-y="0" size-y2="87"/>
+    <entity uuid="388dcff2-156e-4396-828b-98714f211617" position-x="-19" position-y="-320" size-x="0" size-x2="181" size-y="0" size-y2="101"/>
     <association uuid="39ad3dd5-487b-4152-9190-558bd7e80668" center-position-x="-7" center-position-y="0"/>
     <entity uuid="3cf6aafe-9b7a-4ad9-a581-b91aaf58d35d" position-x="1608" position-y="80" size-x="0" size-x2="122" size-y="0" size-y2="129"/>
     <entity uuid="3da990c1-6ab8-436e-8800-e09a08ebee16" position-x="880" position-y="1030" size-x="0" size-x2="130" size-y="0" size-y2="129"/>
@@ -1073,13 +1073,13 @@
     <association uuid="912bcd0c-6fd6-486f-840c-05be8029c3ae" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" splitted="1"/>
     <association uuid="9a0a56b5-00e0-4eef-aba0-5c00267415cc" center-position-x="0" center-position-y="0" splitted="1"/>
     <entity uuid="9c600e0e-ec78-4b30-9eef-9028a917a67b" position-x="976" position-y="875" size-x="0" size-x2="109" size-y="0" size-y2="129"/>
+    <association uuid="9e4f9c71-2104-46c4-8ac5-becd5a874514" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" splitted="1"/>
     <association uuid="9ebc868a-ee73-4fac-a3e0-9eb0ae4ca726" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" splitted="1"/>
     <entity uuid="9f26679f-99e4-48b9-b544-4d7377988044" position-x="280" position-y="1078" size-x="0" size-x2="89" size-y="0" size-y2="73"/>
     <entity uuid="a4eeb330-c86b-4443-968b-c166863303b1" position-x="390" position-y="-6" size-x="0" size-x2="102" size-y="0" size-y2="115"/>
     <entity uuid="aa930c08-4f0b-4947-b15b-840caa7455cb" position-x="805" position-y="323" size-x="0" size-x2="126" size-y="0" size-y2="101"/>
     <association uuid="ab08b405-788c-4579-bc8d-3445b6ba3821" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="-56"/>
     <association uuid="b07de887-fccd-487b-85a9-f3ec04d0e521" splitted="1"/>
-    <association uuid="b5d2a344-99c9-4bd6-90e8-3b6256f53ea5" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0"/>
     <association uuid="b7535ca1-a516-46b8-b21a-3ca58a497acb" splitted="1"/>
     <entity uuid="bad4f785-8f04-4d84-8cc9-36f638715559" position-x="1052" position-y="128" size-x="0" size-x2="155" size-y="0" size-y2="339"/>
     <association uuid="bf0010ea-05f6-4c66-8319-355a6ed43502" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0"/>

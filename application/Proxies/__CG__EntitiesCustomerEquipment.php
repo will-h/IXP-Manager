@@ -123,10 +123,28 @@ class CustomerEquipment extends \Entities\CustomerEquipment implements \Doctrine
         return parent::getPatchPanelPortObject();
     }
 
+    public function addPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->__load();
+        return parent::addPatchPanelPortObject($patchPanelPortObjects);
+    }
+
+    public function removePatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->__load();
+        return parent::removePatchPanelPortObject($patchPanelPortObjects);
+    }
+
+    public function getPatchPanelPortObjects()
+    {
+        $this->__load();
+        return parent::getPatchPanelPortObjects();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'name', 'descr', 'id', 'PatchPanelPortObject', 'Customer', 'Cabinet');
+        return array('__isInitialized__', 'name', 'descr', 'id', 'PatchPanelPortObjects', 'Customer', 'Cabinet');
     }
 
     public function __clone()

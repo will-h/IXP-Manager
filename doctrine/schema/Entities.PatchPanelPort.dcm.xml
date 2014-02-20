@@ -21,11 +21,7 @@
         <join-column name="patch_panel_id" referenced-column-name="id" nullable="false"/>
       </join-columns>
     </many-to-one>
-    <one-to-one field="Object" target-entity="Entities\PatchPanelPortObject" inversed-by="PatchPort">
-      <join-columns>
-        <join-column name="port_object_id" referenced-column-name="id" nullable="false" unique="true"/>
-      </join-columns>
-    </one-to-one>
-    <one-to-one field="PatchPanelPortObject" target-entity="Entities\PatchPanelPortObject" mapped-by="PatchPanelPort"/>
+    <one-to-many field="PatchPanelPortObjects" target-entity="Entities\PatchPanelPortObject" mapped-by="PatchPanelPort"/>
+    <one-to-one field="ConnectionProxy" target-entity="Entities\PatchPanelPortObject" mapped-by="Port"/>
   </entity>
 </doctrine-mapping>

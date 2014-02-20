@@ -80,11 +80,6 @@ class PatchPanelPort
     private $Object;
 
     /**
-     * @var \Entities\PatchPanelPortObject
-     */
-    private $PatchPanelPortObject;
-
-    /**
      * @var \Entities\PatchPanel
      */
     private $PatchPanel;
@@ -376,51 +371,6 @@ class PatchPanelPort
         return $this->id;
     }
 
-    /**
-     * Set Object
-     *
-     * @param \Entities\PatchPanelPortObject $object
-     * @return PatchPanelPort
-     */
-    public function setObject(\Entities\PatchPanelPortObject $object)
-    {
-        $this->Object = $object;
-    
-        return $this;
-    }
-
-    /**
-     * Get Object
-     *
-     * @return \Entities\PatchPanelPortObject 
-     */
-    public function getObject()
-    {
-        return $this->Object;
-    }
-
-    /**
-     * Set PatchPanelPortObject
-     *
-     * @param \Entities\PatchPanelPortObject $patchPanelPortObject
-     * @return PatchPanelPort
-     */
-    public function setPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObject = null)
-    {
-        $this->PatchPanelPortObject = $patchPanelPortObject;
-    
-        return $this;
-    }
-
-    /**
-     * Get PatchPanelPortObject
-     *
-     * @return \Entities\PatchPanelPortObject 
-     */
-    public function getPatchPanelPortObject()
-    {
-        return $this->PatchPanelPortObject;
-    }
 
     /**
      * Set PatchPanel
@@ -443,5 +393,78 @@ class PatchPanelPort
     public function getPatchPanel()
     {
         return $this->PatchPanel;
+    }
+    /**
+     * @var \Entities\PatchPanelPortObject
+     */
+    private $ConnectionProxy;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $PatchPanelPortObjects;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->PatchPanelPortObjects = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Set ConnectionProxy
+     *
+     * @param \Entities\PatchPanelPortObject $connectionProxy
+     * @return PatchPanelPort
+     */
+    public function setConnectionProxy(\Entities\PatchPanelPortObject $connectionProxy = null)
+    {
+        $this->ConnectionProxy = $connectionProxy;
+    
+        return $this;
+    }
+
+    /**
+     * Get ConnectionProxy
+     *
+     * @return \Entities\PatchPanelPortObject 
+     */
+    public function getConnectionProxy()
+    {
+        return $this->ConnectionProxy;
+    }
+
+    /**
+     * Add PatchPanelPortObjects
+     *
+     * @param \Entities\PatchPanelPortObject $patchPanelPortObjects
+     * @return PatchPanelPort
+     */
+    public function addPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->PatchPanelPortObjects[] = $patchPanelPortObjects;
+    
+        return $this;
+    }
+
+    /**
+     * Remove PatchPanelPortObjects
+     *
+     * @param \Entities\PatchPanelPortObject $patchPanelPortObjects
+     */
+    public function removePatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->PatchPanelPortObjects->removeElement($patchPanelPortObjects);
+    }
+
+    /**
+     * Get PatchPanelPortObjects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPatchPanelPortObjects()
+    {
+        return $this->PatchPanelPortObjects;
     }
 }

@@ -111,10 +111,22 @@ class PatchPanelPortObject extends \Entities\PatchPanelPortObject implements \Do
         return parent::getPatchPort();
     }
 
+    public function setPort(\Entities\PatchPanelPort $port)
+    {
+        $this->__load();
+        return parent::setPort($port);
+    }
+
+    public function getPort()
+    {
+        $this->__load();
+        return parent::getPort();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'ConsoleServerConnection', 'CustomerEquipment', 'PatchPanelPort', 'SwitchPort', 'PatchPort');
+        return array('__isInitialized__', 'id', 'Port', 'ConsoleServerConnection', 'CustomerEquipment', 'SwitchPort', 'PatchPanelPort');
     }
 
     public function __clone()

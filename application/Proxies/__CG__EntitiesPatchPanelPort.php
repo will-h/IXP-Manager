@@ -195,30 +195,6 @@ class PatchPanelPort extends \Entities\PatchPanelPort implements \Doctrine\ORM\P
         return parent::getId();
     }
 
-    public function setObject(\Entities\PatchPanelPortObject $object)
-    {
-        $this->__load();
-        return parent::setObject($object);
-    }
-
-    public function getObject()
-    {
-        $this->__load();
-        return parent::getObject();
-    }
-
-    public function setPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObject = NULL)
-    {
-        $this->__load();
-        return parent::setPatchPanelPortObject($patchPanelPortObject);
-    }
-
-    public function getPatchPanelPortObject()
-    {
-        $this->__load();
-        return parent::getPatchPanelPortObject();
-    }
-
     public function setPatchPanel(\Entities\PatchPanel $patchPanel)
     {
         $this->__load();
@@ -231,10 +207,40 @@ class PatchPanelPort extends \Entities\PatchPanelPort implements \Doctrine\ORM\P
         return parent::getPatchPanel();
     }
 
+    public function setConnectionProxy(\Entities\PatchPanelPortObject $connectionProxy = NULL)
+    {
+        $this->__load();
+        return parent::setConnectionProxy($connectionProxy);
+    }
+
+    public function getConnectionProxy()
+    {
+        $this->__load();
+        return parent::getConnectionProxy();
+    }
+
+    public function addPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->__load();
+        return parent::addPatchPanelPortObject($patchPanelPortObjects);
+    }
+
+    public function removePatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->__load();
+        return parent::removePatchPanelPortObject($patchPanelPortObjects);
+    }
+
+    public function getPatchPanelPortObjects()
+    {
+        $this->__load();
+        return parent::getPatchPanelPortObjects();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'position', 'medium', 'connector', 'available_for_use', 'duplex', 'colo_reference', 'ordered', 'completed', 'ceased', 'notes', 'deleted', 'deleted_on', 'id', 'Object', 'PatchPanelPortObject', 'PatchPanel');
+        return array('__isInitialized__', 'position', 'medium', 'connector', 'available_for_use', 'duplex', 'colo_reference', 'ordered', 'completed', 'ceased', 'notes', 'deleted', 'deleted_on', 'id', 'ConnectionProxy', 'PatchPanelPortObjects', 'PatchPanel');
     }
 
     public function __clone()

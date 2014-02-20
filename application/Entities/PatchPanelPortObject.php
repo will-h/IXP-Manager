@@ -164,4 +164,32 @@ class PatchPanelPortObject
     {
         return $this->PatchPort;
     }
+    /**
+     * @var \Entities\PatchPanelPort
+     */
+    private $Port;
+
+
+    /**
+     * Set Port
+     *
+     * @param \Entities\PatchPanelPort $port
+     * @return PatchPanelPortObject
+     */
+    public function setPort(\Entities\PatchPanelPort $port)
+    {
+        $this->Port = $port;
+    
+        return $this;
+    }
+
+    /**
+     * Get Port
+     *
+     * @return \Entities\PatchPanelPort 
+     */
+    public function getPort()
+    {
+        return $this->Port;
+    }
 }

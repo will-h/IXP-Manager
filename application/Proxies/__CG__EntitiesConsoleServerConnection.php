@@ -183,10 +183,28 @@ class ConsoleServerConnection extends \Entities\ConsoleServerConnection implemen
         return parent::getPatchPanelPortObject();
     }
 
+    public function addPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->__load();
+        return parent::addPatchPanelPortObject($patchPanelPortObjects);
+    }
+
+    public function removePatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->__load();
+        return parent::removePatchPanelPortObject($patchPanelPortObjects);
+    }
+
+    public function getPatchPanelPortObjects()
+    {
+        $this->__load();
+        return parent::getPatchPanelPortObjects();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'description', 'port', 'speed', 'parity', 'stopbits', 'flowcontrol', 'autobaud', 'notes', 'id', 'PatchPanelPortObject', 'Customer', 'Switcher');
+        return array('__isInitialized__', 'description', 'port', 'speed', 'parity', 'stopbits', 'flowcontrol', 'autobaud', 'notes', 'id', 'PatchPanelPortObjects', 'Customer', 'Switcher');
     }
 
     public function __clone()

@@ -16,6 +16,6 @@
         <join-column name="cabinetid" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <one-to-one field="PatchPanelPortObject" target-entity="Entities\PatchPanelPortObject" mapped-by="CustomerEquipment"/>
+    <one-to-many field="PatchPanelPortObjects" target-entity="Entities\PatchPanelPortObject" mapped-by="CustomerEquipment"/>
   </entity>
 </doctrine-mapping>

@@ -285,10 +285,28 @@ class SwitchPort extends \Entities\SwitchPort implements \Doctrine\ORM\Proxy\Pro
         return parent::getPatchPanelPortObject();
     }
 
+    public function addPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->__load();
+        return parent::addPatchPanelPortObject($patchPanelPortObjects);
+    }
+
+    public function removePatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
+    {
+        $this->__load();
+        return parent::removePatchPanelPortObject($patchPanelPortObjects);
+    }
+
+    public function getPatchPanelPortObjects()
+    {
+        $this->__load();
+        return parent::getPatchPanelPortObjects();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'type', 'name', 'active', 'ifIndex', 'ifName', 'ifAlias', 'ifHighSpeed', 'ifMtu', 'ifPhysAddress', 'ifAdminStatus', 'ifOperStatus', 'ifLastChange', 'lastSnmpPoll', 'lagIfIndex', 'id', 'PhysicalInterface', 'PatchPanelPortObject', 'SecEvents', 'Switcher');
+        return array('__isInitialized__', 'type', 'name', 'active', 'ifIndex', 'ifName', 'ifAlias', 'ifHighSpeed', 'ifMtu', 'ifPhysAddress', 'ifAdminStatus', 'ifOperStatus', 'ifLastChange', 'lastSnmpPoll', 'lagIfIndex', 'id', 'PhysicalInterface', 'SecEvents', 'PatchPanelPortObjects', 'Switcher');
     }
 
     public function __clone()
