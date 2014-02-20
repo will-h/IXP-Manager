@@ -164,4 +164,32 @@ class CustomerEquipment
     {
         return $this->descr;
     }
+    /**
+     * @var \Entities\PatchPanelPortObject
+     */
+    private $PatchPanelPortObject;
+
+
+    /**
+     * Set PatchPanelPortObject
+     *
+     * @param \Entities\PatchPanelPortObject $patchPanelPortObject
+     * @return CustomerEquipment
+     */
+    public function setPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObject = null)
+    {
+        $this->PatchPanelPortObject = $patchPanelPortObject;
+    
+        return $this;
+    }
+
+    /**
+     * Get PatchPanelPortObject
+     *
+     * @return \Entities\PatchPanelPortObject 
+     */
+    public function getPatchPanelPortObject()
+    {
+        return $this->PatchPanelPortObject;
+    }
 }

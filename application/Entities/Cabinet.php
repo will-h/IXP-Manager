@@ -304,4 +304,42 @@ class Cabinet
     {
         return $this->cololocation;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $PatchPanel;
+
+
+    /**
+     * Add PatchPanel
+     *
+     * @param \Entities\PatchPanel $patchPanel
+     * @return Cabinet
+     */
+    public function addPatchPanel(\Entities\PatchPanel $patchPanel)
+    {
+        $this->PatchPanel[] = $patchPanel;
+    
+        return $this;
+    }
+
+    /**
+     * Remove PatchPanel
+     *
+     * @param \Entities\PatchPanel $patchPanel
+     */
+    public function removePatchPanel(\Entities\PatchPanel $patchPanel)
+    {
+        $this->PatchPanel->removeElement($patchPanel);
+    }
+
+    /**
+     * Get PatchPanel
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPatchPanel()
+    {
+        return $this->PatchPanel;
+    }
 }

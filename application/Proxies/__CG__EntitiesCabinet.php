@@ -171,10 +171,28 @@ class Cabinet extends \Entities\Cabinet implements \Doctrine\ORM\Proxy\Proxy
         return parent::getCololocation();
     }
 
+    public function addPatchPanel(\Entities\PatchPanel $patchPanel)
+    {
+        $this->__load();
+        return parent::addPatchPanel($patchPanel);
+    }
+
+    public function removePatchPanel(\Entities\PatchPanel $patchPanel)
+    {
+        $this->__load();
+        return parent::removePatchPanel($patchPanel);
+    }
+
+    public function getPatchPanel()
+    {
+        $this->__load();
+        return parent::getPatchPanel();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'name', 'cololocation', 'height', 'type', 'notes', 'id', 'Switches', 'CustomerEquipment', 'Location');
+        return array('__isInitialized__', 'name', 'cololocation', 'height', 'type', 'notes', 'id', 'Switches', 'CustomerEquipment', 'PatchPanel', 'Location');
     }
 
     public function __clone()

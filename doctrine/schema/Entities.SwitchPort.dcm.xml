@@ -25,5 +25,6 @@
     </many-to-one>
     <one-to-one field="PhysicalInterface" target-entity="Entities\PhysicalInterface" mapped-by="SwitchPort"/>
     <one-to-many field="SecEvents" target-entity="Entities\SecEvent" mapped-by="SwitchPort"/>
+    <one-to-one field="PatchPanelPortObject" target-entity="Entities\PatchPanelPortObject" mapped-by="SwitchPort"/>
   </entity>
 </doctrine-mapping>

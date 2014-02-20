@@ -22,5 +22,6 @@
         <join-column name="switchid" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
+    <one-to-one field="PatchPanelPortObject" target-entity="Entities\PatchPanelPortObject" mapped-by="ConsoleServerConnection"/>
   </entity>
 </doctrine-mapping>
