@@ -148,6 +148,22 @@ class PatchPanelController extends IXP_Controller_FrontEnd
         }
     }
 
+    /**
+     * Preparation hook that can be overridden by subclasses for add and edit.
+     *
+     * This is called just before we process a possible POST / submission and
+     * will allow us to change / alter the form or object.
+     *
+     * @param OSS_Form $form The Send form object
+     * @param object $object The Doctrine2 entity (being edited or blank for add)
+     * @param bool $isEdit True if we are editing, otherwise false
+     */
+    protected function addPrepare( $form, $object, $isEdit )
+    {
+        if( $isEdit )
+            $form->getElement( 'installed' )->setValue( $object->getInstalled()->format( 'Y-m-d' ) );
+    }
+
 
     /**
      *
