@@ -59,6 +59,14 @@ class PatchPanelController extends IXP_Controller_FrontEnd
                     'id'        => [ 'title' => 'UID', 'display' => false ],
                     'name'           => 'Name',
 
+                    'cabinet'  => [
+                        'title'      => 'Cabinet',
+                        'type'       => self::$FE_COL_TYPES[ 'HAS_ONE' ],
+                        'controller' => 'cabinet',
+                        'action'     => 'view',
+                        'idField'    => 'cabinet_id'
+                    ],
+
                     'medium'         => [
                         'title'     => 'Medium',
                         'type'      => self::$FE_COL_TYPES[ 'XLATE' ],
@@ -72,14 +80,6 @@ class PatchPanelController extends IXP_Controller_FrontEnd
                     ],
 
 
-                    'cabinet'  => [
-                        'title'      => 'Cabinet',
-                        'type'       => self::$FE_COL_TYPES[ 'HAS_ONE' ],
-                        'controller' => 'cabinet',
-                        'action'     => 'view',
-                        'idField'    => 'cabinet_id'
-                    ],
-
                     'duplex_allowed'       => [
                             'title'    => 'Duplex?',
                             'type'     => self::$FE_COL_TYPES[ 'SCRIPT' ],
@@ -92,6 +92,11 @@ class PatchPanelController extends IXP_Controller_FrontEnd
                 $this->_feParams->viewColumns = array_merge(
                     $this->_feParams->listColumns,
                     [
+                        'u_position'     => 'Rack U Position',
+                        'installed'      => [
+                            'title'     => 'Installed',
+                            'type'      => self::$FE_COL_TYPES[ 'DATE' ]
+                        ],
                         'notes'          => 'Notes'
                     ]
                 );
@@ -113,7 +118,8 @@ class PatchPanelController extends IXP_Controller_FrontEnd
     {
         $qb = $this->getD2EM()->createQueryBuilder()
             ->select( 'pp.id AS id, pp.name AS name, pp.duplex_allowed AS duplex_allowed, pp.notes AS notes,
-                        pp.medium AS medium, pp.connector AS connector,
+                        pp.medium AS medium, pp.connector AS connector, pp.u_position AS u_position,
+                        pp.installed AS installed,
                         c.id AS cabinet_id, c.name AS cabinet' )
             ->from( '\\Entities\\PatchPanel', 'pp' )
             ->leftJoin( 'pp.Cabinet', 'c' );
@@ -122,7 +128,7 @@ class PatchPanelController extends IXP_Controller_FrontEnd
             $qb->orderBy( $this->_feParams->listOrderBy, isset( $this->_feParams->listOrderByDir ) ? $this->_feParams->listOrderByDir : 'ASC' );
 
         if( $id !== null )
-            $qb->andWhere( 's.id = ?1' )->setParameter( 1, $id );
+            $qb->andWhere( 'pp.id = ?1' )->setParameter( 1, $id );
 
         return $qb->getQuery()->getResult();
     }

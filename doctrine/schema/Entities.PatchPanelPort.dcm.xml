@@ -10,9 +10,9 @@
     <field name="available_for_use" type="boolean" nullable="false"/>
     <field name="duplex" type="integer" nullable="false"/>
     <field name="colo_reference" type="string" length="255" nullable="true"/>
-    <field name="ordered" type="date" nullable="true"/>
-    <field name="completed" type="date" nullable="true"/>
-    <field name="ceased" type="date" nullable="true"/>
+    <field name="assigned" type="date" nullable="true"/>
+    <field name="connected" type="date" nullable="true"/>
+    <field name="cancelled" type="date" nullable="true"/>
     <field name="notes" type="text" nullable="true"/>
     <field name="deleted" type="boolean" nullable="false"/>
     <field name="deleted_on" type="datetime" nullable="true"/>

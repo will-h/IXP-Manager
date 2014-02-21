@@ -319,4 +319,14 @@ class PatchPanel
     {
         return $this->Cabinet;
     }
+
+    /**
+     * Is this patch panel of mixed medium?
+     * 
+     * @return boolean 
+     */
+    public function isMediaMixed()
+    {
+        return $this->getMedium() == self::MEDIUM_MIXED;
+    }
 }

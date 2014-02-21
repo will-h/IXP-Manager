@@ -1,0 +1,97 @@
+{tmplinclude file="header.phtml"}
+
+<ul class="breadcrumb">
+    <li>
+        <a href="{genUrl}">Home</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="{genUrl controller=$controller action="list"}">{$feParams->pagetitle}</a> <span class="divider">/</span>
+    </li>
+    <li class="active">
+        List for
+        <a href="{genUrl controller="patch-panel" action="view" id=$patchPanel->getId()}">
+            {$patchPanel->getName()}
+        </a>
+        &nbsp;&nbsp;::&nbsp;&nbsp;
+        {if not $patchPanel->isMediaMixed()}
+            {PATCH_PANEL::$MEDIA[ $patchPanel->getMedium() ]}/{PATCH_PANEL::$CONNECTORS[ $patchPanel->getConnector() ]}
+        {/if}
+    </li>
+    
+    <li class="pull-right">
+    </li>
+</ul>
+
+<div>
+    
+{OSS_Message}
+
+<table id='patch-panel-ports-table' class="table table-striped table-bordered table-condensed">
+
+<thead>
+    <tr>
+        <th>Port</th>
+        <th>Colo Ref</th>
+        {if $patchPanel->isMediaMixed()}
+            <th>Type</th>
+        {/if}
+        {if $patchPanel->getDuplexAllowed()}
+            <th>Duplex</th>
+        {/if}
+        <th>Customer</th>
+        <th>Connected To</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+</thead>
+
+<tbody>
+    {foreach $data as $ppp}
+        <tr>
+            <td>
+                {$ppp->getPosition()}
+            </td>
+            <td>
+                {$ppp->getColoReference()}
+            </td>
+            {if $patchPanel->isMediaMixed()}
+                <td>
+                    {PATCH_PANEL::$MEDIA[ $ppp->getMedium() ]}/{PATCH_PANEL::$CONNECTORS[ $ppp->getConnector() ]}
+                </td>
+            {/if}
+            {if $patchPanel->getDuplexAllowed()}
+                <td>
+                    {if $ppp->getDuplex()}
+                        {$ppp->getDuplex()}
+                    {/if}
+                </td>
+            {/if}
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+                {if $ppp->getCancelled()}
+                    <span class="label label-important">Cancelled {$row.cancelled->format( 'Y-m-d' )}</span>
+                {elseif $ppp->getConnected()}
+                    <span class="label label-info">Connected {$row.cancelled->format( 'Y-m-d' )}</span>
+                {elseif $ppp->getAssigned()}
+                    <span class="label label-warning">Assigned {$row.cancelled->format( 'Y-m-d' )}</span>
+                {else}
+                    <span class="label label-success">Available</span>
+                {/if}
+            </td>
+            <td>
+                {tmplinclude file='patch-panel-port/list-row-menu.phtml'}
+            </td>
+        </tr>
+    {/foreach}
+</tbody>
+
+</table>
+    
+</div>
+
+<script>{tmplinclude file='patch-panel-port/js/list.js'}</script>
+
+{tmplinclude file="footer.phtml"}

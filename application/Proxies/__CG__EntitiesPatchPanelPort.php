@@ -114,42 +114,6 @@ class PatchPanelPort extends \Entities\PatchPanelPort implements \Doctrine\ORM\P
         return parent::getColoReference();
     }
 
-    public function setOrdered($ordered)
-    {
-        $this->__load();
-        return parent::setOrdered($ordered);
-    }
-
-    public function getOrdered()
-    {
-        $this->__load();
-        return parent::getOrdered();
-    }
-
-    public function setCompleted($completed)
-    {
-        $this->__load();
-        return parent::setCompleted($completed);
-    }
-
-    public function getCompleted()
-    {
-        $this->__load();
-        return parent::getCompleted();
-    }
-
-    public function setCeased($ceased)
-    {
-        $this->__load();
-        return parent::setCeased($ceased);
-    }
-
-    public function getCeased()
-    {
-        $this->__load();
-        return parent::getCeased();
-    }
-
     public function setNotes($notes)
     {
         $this->__load();
@@ -237,10 +201,46 @@ class PatchPanelPort extends \Entities\PatchPanelPort implements \Doctrine\ORM\P
         return parent::getPatchPanelPortObjects();
     }
 
+    public function setAssigned($assigned)
+    {
+        $this->__load();
+        return parent::setAssigned($assigned);
+    }
+
+    public function getAssigned()
+    {
+        $this->__load();
+        return parent::getAssigned();
+    }
+
+    public function setConnected($connected)
+    {
+        $this->__load();
+        return parent::setConnected($connected);
+    }
+
+    public function getConnected()
+    {
+        $this->__load();
+        return parent::getConnected();
+    }
+
+    public function setCancelled($cancelled)
+    {
+        $this->__load();
+        return parent::setCancelled($cancelled);
+    }
+
+    public function getCancelled()
+    {
+        $this->__load();
+        return parent::getCancelled();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'position', 'medium', 'connector', 'available_for_use', 'duplex', 'colo_reference', 'ordered', 'completed', 'ceased', 'notes', 'deleted', 'deleted_on', 'id', 'ConnectionProxy', 'PatchPanelPortObjects', 'PatchPanel');
+        return array('__isInitialized__', 'position', 'medium', 'connector', 'available_for_use', 'duplex', 'colo_reference', 'assigned', 'connected', 'cancelled', 'notes', 'deleted', 'deleted_on', 'id', 'ConnectionProxy', 'PatchPanelPortObjects', 'PatchPanel');
     }
 
     public function __clone()

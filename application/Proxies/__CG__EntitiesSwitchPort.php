@@ -273,18 +273,6 @@ class SwitchPort extends \Entities\SwitchPort implements \Doctrine\ORM\Proxy\Pro
         return parent::getLagIfIndex();
     }
 
-    public function setPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObject = NULL)
-    {
-        $this->__load();
-        return parent::setPatchPanelPortObject($patchPanelPortObject);
-    }
-
-    public function getPatchPanelPortObject()
-    {
-        $this->__load();
-        return parent::getPatchPanelPortObject();
-    }
-
     public function addPatchPanelPortObject(\Entities\PatchPanelPortObject $patchPanelPortObjects)
     {
         $this->__load();

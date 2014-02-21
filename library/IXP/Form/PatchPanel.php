@@ -89,6 +89,7 @@ class IXP_Form_PatchPanel extends IXP_Form
         $upos->addValidator( 'between', false, array( 0, 60 ) )
             ->setAttrib( 'class', 'span3' )
             ->setLabel( 'Rack U Position' )
+            ->setRequired( true )
             ->addFilter( new OSS_Filter_StripSlashes() );
         $this->addElement( $upos );
 

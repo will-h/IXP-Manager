@@ -40,21 +40,6 @@ class PatchPanelPort
     private $colo_reference;
 
     /**
-     * @var \DateTime
-     */
-    private $ordered;
-
-    /**
-     * @var \DateTime
-     */
-    private $completed;
-
-    /**
-     * @var \DateTime
-     */
-    private $ceased;
-
-    /**
      * @var string
      */
     private $notes;
@@ -223,74 +208,6 @@ class PatchPanelPort
         return $this->colo_reference;
     }
 
-    /**
-     * Set ordered
-     *
-     * @param \DateTime $ordered
-     * @return PatchPanelPort
-     */
-    public function setOrdered($ordered)
-    {
-        $this->ordered = $ordered;
-    
-        return $this;
-    }
-
-    /**
-     * Get ordered
-     *
-     * @return \DateTime 
-     */
-    public function getOrdered()
-    {
-        return $this->ordered;
-    }
-
-    /**
-     * Set completed
-     *
-     * @param \DateTime $completed
-     * @return PatchPanelPort
-     */
-    public function setCompleted($completed)
-    {
-        $this->completed = $completed;
-    
-        return $this;
-    }
-
-    /**
-     * Get completed
-     *
-     * @return \DateTime 
-     */
-    public function getCompleted()
-    {
-        return $this->completed;
-    }
-
-    /**
-     * Set ceased
-     *
-     * @param \DateTime $ceased
-     * @return PatchPanelPort
-     */
-    public function setCeased($ceased)
-    {
-        $this->ceased = $ceased;
-    
-        return $this;
-    }
-
-    /**
-     * Get ceased
-     *
-     * @return \DateTime 
-     */
-    public function getCeased()
-    {
-        return $this->ceased;
-    }
 
     /**
      * Set notes
@@ -466,5 +383,89 @@ class PatchPanelPort
     public function getPatchPanelPortObjects()
     {
         return $this->PatchPanelPortObjects;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $assigned;
+
+    /**
+     * @var \DateTime
+     */
+    private $connected;
+
+    /**
+     * @var \DateTime
+     */
+    private $cancelled;
+
+
+    /**
+     * Set assigned
+     *
+     * @param \DateTime $assigned
+     * @return PatchPanelPort
+     */
+    public function setAssigned($assigned)
+    {
+        $this->assigned = $assigned;
+    
+        return $this;
+    }
+
+    /**
+     * Get assigned
+     *
+     * @return \DateTime 
+     */
+    public function getAssigned()
+    {
+        return $this->assigned;
+    }
+
+    /**
+     * Set connected
+     *
+     * @param \DateTime $connected
+     * @return PatchPanelPort
+     */
+    public function setConnected($connected)
+    {
+        $this->connected = $connected;
+    
+        return $this;
+    }
+
+    /**
+     * Get connected
+     *
+     * @return \DateTime 
+     */
+    public function getConnected()
+    {
+        return $this->connected;
+    }
+
+    /**
+     * Set cancelled
+     *
+     * @param \DateTime $cancelled
+     * @return PatchPanelPort
+     */
+    public function setCancelled($cancelled)
+    {
+        $this->cancelled = $cancelled;
+    
+        return $this;
+    }
+
+    /**
+     * Get cancelled
+     *
+     * @return \DateTime 
+     */
+    public function getCancelled()
+    {
+        return $this->cancelled;
     }
 }
