@@ -167,6 +167,15 @@ class CabinetController extends IXP_Controller_FrontEnd
             return false;
         }
 
+        if( count( $object->getPatchPanels() ) )
+        {
+            $this->addMessage(
+                "Could not delete the cabinet as at least one patch panel is located here. Reassign or delete the panel first.",
+                OSS_Message::ERROR
+            );
+            return false;
+        }
+
         return true;
     }
 
