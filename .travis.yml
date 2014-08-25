@@ -16,3 +16,6 @@ before_install:
 after_failure:
     - "./data/travis-ci/after_failure.sh"
 
+branches:
+  except:
+    - develop-v4
