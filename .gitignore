@@ -34,3 +34,14 @@ application/configs/rc-inex-*conf
 application/configs/rs*-inex-*.conf
 application/configs/ci-*
 *.DS_Store
+
+/bootstrap/compiled.php
+/bootstrap/manual_enviroment
+/vendor
+composer.phar
+composer.lock
+.env.*.php
+.env.php
+Thumbs.db
+*.kate-swp
+

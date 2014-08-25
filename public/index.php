@@ -1,5 +1,7 @@
 <?php
 
+require_once( '../vendor/autoload.php' );
+
 /*
  * Copyright (C) 2009-2014 Internet Neutral Exchange Association Limited.
  * All Rights Reserved.
