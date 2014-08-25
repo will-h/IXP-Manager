@@ -122,6 +122,13 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+
+        'TwigBridge\ServiceProvider',
+        'Doctrine2Bridge\Doctrine2CacheBridgeServiceProvider',
+        'Doctrine2Bridge\Doctrine2BridgeServiceProvider',
+        'Former\FormerServiceProvider',
+        // 'IXP\ServiceProvider\TwigExtensions',
+
 	),
 
 	/*
@@ -189,6 +196,8 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
+
+        'Former'          => 'Former\Facades\Former',
 	),
 
 );
