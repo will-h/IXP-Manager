@@ -78,7 +78,8 @@
             "vendor/smarty/smarty/libs/sysplugins/smarty_security.php"
         ],
         "psr-0": {
-	    "IXP_": "library/"
+	    "IXP_": "library/",
+            "IXP": "app/lib/"
         }
     },
     "minimum-stability": "dev"
