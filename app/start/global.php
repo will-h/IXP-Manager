@@ -79,15 +79,3 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
-
-
-/*
-|--------------------------------------------------------------------------
-| IXP Manager additions:
-|--------------------------------------------------------------------------
-*/
-
-require app_path().'/listeners.php';
-require app_path().'/ixp-manager.php';
-
-

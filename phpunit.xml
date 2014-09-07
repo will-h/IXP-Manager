@@ -1,10 +1,21 @@
-<phpunit>
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+>
     <testsuites>
-        <testsuite name="IXP_Manager">
+        <!-- testsuite name="IXP_Manager">
             <directory>tests</directory>
-        </testsuite>
-        <testsuite name="Application Test Suite">
-            <directory>./app/tests/</directory>
+        </testsuite -->
+        <testsuite name="Oss2\Auth Test Suite">
+            <directory>./workbench/oss2/auth/tests/</directory>
         </testsuite>
     </testsuites>
     <php>

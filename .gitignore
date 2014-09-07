@@ -45,3 +45,4 @@ composer.lock
 Thumbs.db
 *.kate-swp
 
+workbench/oss2/auth

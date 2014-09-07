@@ -96,7 +96,7 @@ return array(
 	'providers' => array(
 
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
-		'Illuminate\Auth\AuthServiceProvider',
+		// 'Illuminate\Auth\AuthServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
 		'Illuminate\Session\CommandsServiceProvider',
 		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
@@ -128,6 +128,8 @@ return array(
         'Doctrine2Bridge\Doctrine2BridgeServiceProvider',
         'Former\FormerServiceProvider',
         // 'IXP\ServiceProvider\TwigExtensions',
+
+		'Oss2\Auth\AuthServiceProvider',
 
 	),
 
@@ -198,6 +200,7 @@ return array(
 
 
         'Former'          => 'Former\Facades\Former',
+
 	),
 
 );
