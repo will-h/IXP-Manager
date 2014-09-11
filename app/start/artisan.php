@@ -11,3 +11,4 @@
 |
 */
 
+Artisan::add( new IXP\Commands\Ping\SwitchPing             );

@@ -155,7 +155,7 @@ class Switcher extends EntityRepository
 
         if( !$superuser && $ixpid )
             $query->setParameter( 1, $ixpid );
-        
+
         return $query->getArrayResult();
     }
 
@@ -171,4 +171,60 @@ class Switcher extends EntityRepository
         return $this->getEntityManager()->createQuery( $q )->getResult();
     }
 
+    /**
+     * Find switch by 'starts with' name
+     *
+     * @param string $name The 'start of' the name of the switch (`LIKE '$name%'`)
+     * @return \Entities\Switcher[]
+     */
+    public function findByNameStartsWith( $name )
+    {
+        return $this->getEntityManager()->createQuery(
+                'SELECT s FROM \\Entities\\Switcher s WHERE s.name LIKE :name'
+            )
+            ->setParameter( 'name', $name . '%' )
+            ->execute();
+    }
+
+    /**
+     * Finds all addresses connected to a switch.
+     *
+     * Returns an array of arrays containing:
+     *
+     *     [
+     *         'ipaddr'    => 'x.x.x.x / x:x::x',
+     *         'custname'  => 'Abbreviated customer name',
+     *         'vlanname'  => 'Vlan name',
+     *         'vlantag'   => 'vlan tag',
+     *         'portname'  => 'switchport ifName',
+     *         'canping'   => bool
+     *     ]
+     *
+     * @param int $switchid The ID of the switch to query
+     * @param int $proto    [4/6]
+     * @return array As described above.
+     */
+    public function getConnectedAddresses( $switchid, $proto = 4 ) {
+        if( !in_array( $proto, [ 4, 6 ] ) )
+            throw new \IXP\Exception( 'Invalid IP protocol - ' . $proto );
+
+        return $this->getEntityManager()->createQuery(
+                "SELECT ip.address AS ipaddr, c.abbreviatedName AS custname,
+                    v.name AS vlanname, sp.ifName AS portname,
+                    v.number AS vlantag,
+                    vli.ipv{$proto}canping AS canping
+                FROM \\Entities\\IPv{$proto}Address ip
+                    LEFT JOIN ip.VlanInterface vli
+                    LEFT JOIN vli.VirtualInterface vi
+                    LEFT JOIN vli.Vlan v
+                    LEFT JOIN vi.Customer c
+                    LEFT JOIN vi.PhysicalInterfaces pi
+                    LEFT JOIN pi.SwitchPort sp
+                    LEFT JOIN sp.Switcher s
+                WHERE s.id = :switchid
+                ORDER BY sp.ifIndex"
+            )
+            ->setParameter( 'switchid', $switchid )
+            ->execute();
+    }
 }

@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('homestead', 'mac1.local'),
+	'local' => array('homestead', 'mac1.local', 'vpn-250.int.inex.ie'),
 
 ));
 
