@@ -58,7 +58,7 @@
         "opensolutions/minify": "1.*",
         "komola/bootstrap-zend-framework": "dev-master",
         "opensolutions/oss-snmp": "dev-master",
-        "laravel/framework": "4.2.*",
+	"laravel/laravel": "dev-master",
 	"rcrowe/twigbridge": "0.6.*",
         "opensolutions/doctrine2bridge": "dev-master",
         "doctrine/migrations": "1.0.*@dev",
