@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_Meeting extends IXP_Form
@@ -37,7 +37,7 @@ class IXP_Form_Meeting extends IXP_Form
     {
 
         $title = $this->createElement( 'text', 'title', array( 'size' => '100' ) );
-        $title->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $title->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setRequired( true )
             ->setLabel( 'Title' )
             ->setValue( 'Members\' Meeting' )
@@ -66,7 +66,7 @@ class IXP_Form_Meeting extends IXP_Form
         $this->addElement( $after_text );
 
         $date = $this->createElement( 'text', 'date' );
-        $date->addValidator( 'stringLength', false, array( 10, 10 ) )
+        $date->addValidator( 'stringLength', false, array( 10, 10, 'UTF-8' ) )
             ->addValidator( 'regex', false, array('/^\d\d\d\d-\d\d-\d\d/' ) )
             ->setRequired( true )
             ->setLabel( 'Date' )
@@ -75,7 +75,7 @@ class IXP_Form_Meeting extends IXP_Form
         $this->addElement( $date );
 
         $time = $this->createElement( 'text', 'time' );
-        $time->addValidator( 'stringLength', false, array( 5, 8 ) )
+        $time->addValidator( 'stringLength', false, array( 5, 8, 'UTF-8' ) )
             ->addValidator( 'regex', false, array('/^\d\d:\d\d(:\d\d){0,1}/' ) )
             ->setRequired( true )
             ->setValue( 'HH:MM' )
@@ -84,7 +84,7 @@ class IXP_Form_Meeting extends IXP_Form
         $this->addElement( $time );
 
         $venue = $this->createElement( 'text', 'venue', array( 'size' => '100' ) );
-        $venue->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $venue->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setRequired( true )
             ->setLabel( 'Venue' )
             ->addFilter( 'StringTrim' )
@@ -93,7 +93,7 @@ class IXP_Form_Meeting extends IXP_Form
         $this->addElement( $venue );
 
         $venue_url = $this->createElement( 'text', 'venue_url', array( 'size' => '100' ) );
-        $venue_url->addValidator( 'stringLength', false, array( 0, 255 ) )
+        $venue_url->addValidator( 'stringLength', false, array( 0, 255, 'UTF-8' ) )
             ->setRequired( false )
             ->setLabel( 'Venue URL' )
             ->addFilter( 'StringTrim' )

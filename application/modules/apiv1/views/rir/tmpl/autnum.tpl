@@ -1,4 +1,4 @@
-password: {$options.rir.ripe_password}
+password: {config('ixp_api.rir.password')}
 
 aut-num:        AS66500
 as-name:        FOOBAR
@@ -16,7 +16,4 @@ notify:         ripe-notify@example.com
 mnt-by:         FOOBAR-IXP-NOC
 mnt-by:         RIPE-NCC-END-MNT
 mnt-routes:     FOOBAR-IXP-NOC
-changed:        someone@example.com 19960601
-changed:        ripe-dbm@ripe.net 19990701
-changed:        ripe-admin@example.com
 source:         RIPE

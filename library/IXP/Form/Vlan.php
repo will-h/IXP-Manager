@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_VLAN extends IXP_Form
@@ -37,7 +37,7 @@ class IXP_Form_VLAN extends IXP_Form
     {
 
         $name = $this->createElement( 'text', 'name' );
-        $name->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $name->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setRequired( true )
             ->setLabel( 'Name' )
             ->setAttrib( 'class', 'span3' )
@@ -62,7 +62,7 @@ class IXP_Form_VLAN extends IXP_Form
         $this->addElement( $infrastructure );
 
         $rcvrfname = $this->createElement( 'text', 'rcvrfname' );
-        $rcvrfname->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $rcvrfname->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setLabel( 'RC VRF Name' )
             ->addFilter( 'StringTrim' )
             ->setAttrib( 'class', 'span3' )

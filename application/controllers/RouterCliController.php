@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2013 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Controller
- * @copyright  Copyright (c) 2009 - 2013, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class RouterCliController extends IXP_Controller_CliAction
@@ -124,13 +124,13 @@ class RouterCliController extends IXP_Controller_CliAction
             // some sanity warnings
             if( $int['irrdbfilter'] && ( !count( $this->view->prefixes ) || !count( $this->view->irrdbAsns ) ) ) {
                 if( !count( $this->view->prefixes ) ) {
-                    $this->getLogger()->alert( sprintf( "WARNING: no prefixes found for %s/IPv%d in route server config generation",
+                    $this->getLogger()->info( sprintf( "WARNING: no prefixes found for %s/IPv%d in route server config generation",
                         $int['cname'], $proto
                     ) );
                 }
 
                 if( !count( $this->view->irrdbAsns ) ) {
-                    $this->getLogger()->alert( sprintf( "WARNING: no ASNs found for %s/IPv%d in route server config generation",
+                    $this->getLogger()->info( sprintf( "WARNING: no ASNs found for %s/IPv%d in route server config generation",
                         $int['cname'], $proto
                     ) );
                 }

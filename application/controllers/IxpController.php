@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2013 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -29,7 +29,7 @@
  * @author     Nerijus Barauskas <nerijus@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Controller
- * @copyright  Copyright (c) 2009 - 2013, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IxpController extends IXP_Controller_FrontEnd
@@ -256,12 +256,11 @@ class IxpController extends IXP_Controller_FrontEnd
     {
         // wipe cached entries
         if( $object->getId() == 1 )
-            $this->getD2Cache()->delete( \Repositories\IXP::CACHE_KEY_DEFAULT_IXP );
+            Cache::forget( \Repositories\IXP::CACHE_KEY_DEFAULT_IXP );
         
-        $this->getD2Cache()->delete( "ixp_{$object->getId()}" );
+        Cache::forget( "ixp_{$object->getId()}" );
         
         return true;
     }
     
 }
-

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_Interface_Physical extends IXP_Form
@@ -47,7 +47,7 @@ class IXP_Form_Interface_Physical extends IXP_Form
             ->setRegisterInArrayValidator( false )
             ->setLabel( 'Port' )
             ->setAttrib( 'class', 'chzn-select span8' )
-            ->addValidator( 'greaterThan', false, array( 'min' => 1 ) )
+            ->addValidator( 'greaterThan', false, array( 'min' => 0 ) )
             ->setErrorMessages( array( 'Please select a switch port' ) );
         $this->addElement( $switchPorts );
 

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2011 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -27,7 +27,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_Contact extends IXP_Form
@@ -37,19 +37,21 @@ class IXP_Form_Contact extends IXP_Form
         $this->setDecorators( [ [ 'ViewScript', [ 'viewScript' => 'contact/forms/edit.phtml' ] ] ] );
 
         $name = $this->createElement( 'text', 'name' );
-        $name->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $name->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setRequired( true )
             ->setLabel( 'Name' )
             //->setAttrib( 'class', 'span3' )
+            ->setAttrib( 'autocomplete', 'off' )
             ->addFilter( 'StringTrim' )
             ->addFilter( 'StripTags' )
             ->addFilter( new OSS_Filter_StripSlashes() );
         $this->addElement( $name );
 
         $position = $this->createElement( 'text', 'position' );
-        $position->addValidator( 'stringLength', false, array( 1, 50 ) )
+        $position->addValidator( 'stringLength', false, array( 1, 50, 'UTF-8' ) )
             ->setRequired( false )
             ->setLabel( 'Position' )
+            ->setAttrib( 'autocomplete', 'off' )
             //->setAttrib( 'class', 'span3' )
             ->addFilter( 'StringTrim' )
             ->addFilter( 'StripTags' )
@@ -62,23 +64,26 @@ class IXP_Form_Contact extends IXP_Form
 
         $this->addElement( OSS_Form_User::createEmailElement( 'email' ) );
         $this->getElement( 'email' )
+            ->setAttrib( 'autocomplete', 'off' )
             ->setRequired( false )
             ->setAttrib( 'class', "" );
 
         $phone = $this->createElement( 'text', 'phone' );
-        $phone->addValidator( 'stringLength', false, array( 1, 32 ) )
+        $phone->addValidator( 'stringLength', false, array( 1, 32, 'UTF-8' ) )
             ->setLabel( _( 'Phone' ) )
             //->setAttrib( 'class', 'span3' )
+            ->setAttrib( 'autocomplete', 'off' )
             ->addFilter( 'StringTrim' )
             ->addFilter( 'StripTags' )
             ->addFilter( new OSS_Filter_StripSlashes() );
         $this->addElement( $phone );
 
         $mobile = $this->createElement( 'text', 'mobile' );
-        $mobile->addValidator( 'stringLength', false, array( 1, 32 ) )
+        $mobile->addValidator( 'stringLength', false, array( 1, 32, 'UTF-8' ) )
             ->setLabel( _( 'Mobile' ) )
             ->addFilter( 'StringTrim' )
             ->addFilter( 'StripTags' )
+            ->setAttrib( 'autocomplete', 'off' )
             //->setAttrib( 'class', 'span3' )
             ->addFilter( new OSS_Filter_StripSlashes() );
         $this->addElement( $mobile );
@@ -87,6 +92,7 @@ class IXP_Form_Contact extends IXP_Form
         $notes->setLabel( 'Notes' )
             ->setRequired( false )
             ->setAttrib( 'style', 'width: 80%;' )
+            ->setAttrib( 'autocomplete', 'off' )
             ->addFilter( new OSS_Filter_StripSlashes() )
             ->addFilter( 'StripTags' )
             ->setAttrib( 'cols', 60 )
@@ -125,17 +131,19 @@ class IXP_Form_Contact extends IXP_Form
         $this->addElement( $login );
 
         $username = OSS_Form_Auth::createUsernameElement();
-        $username->addValidator( 'stringLength', false, array( 2, 30 ) )
+        $username->addValidator( 'stringLength', false, array( 2, 30, 'UTF-8' ) )
             ->addValidator( 'regex', true, array( '/^[a-zA-Z0-9\-_\.]+$/' ) )
             ->setRequired( false )
+            ->setAttrib( 'autocomplete', 'off' )
             ->setAttrib( 'class', '' );
         $this->addElement( $username );
 
         $password = $this->createElement( 'text', 'password' );
-        $password->addValidator( 'stringLength', false, array( 8, 30 ) )
+        $password->addValidator( 'stringLength', false, array( 8, 30, 'UTF-8' ) )
             ->setRequired( false )
             //->setAttrib( 'class', 'span3' )
             ->setLabel( 'Password' )
+            ->setAttrib( 'autocomplete', 'off' )
             ->addFilter( 'StringTrim' )
             ->addFilter( new OSS_Filter_StripSlashes() );
         $this->addElement( $password );

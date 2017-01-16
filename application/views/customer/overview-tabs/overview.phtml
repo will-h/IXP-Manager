@@ -3,14 +3,14 @@
     <div class="row-fluid">
 
         <div class="well">
-             <h3>Aggregate Traffic Statistics</h3>
+             <h3>
+                Aggregate Traffic Statistics
+                <a class="btn btn-default" href="{genUrl controller="statistics" action="member-drilldown" shortname=$cust->getShortname() category='bits' monitorindex='aggregate'}">
+                    <i class="icon-eye-open"></i>
+                </a>
+             </h3>
 
-             <p>
-                 <br />
-                 <a href="{genUrl controller='statistics' action='member-drilldown' monitorindex='aggregate' category='bits' shortname=$cust->getShortname()}">
-                     {genMrtgImgUrlTag shortname=$cust->getShortname() category='bits' monitorindex='aggregate'}
-                 </a>
-             </p>
+             {$aggregateGraph->renderer()->boxLegacy()}
          </div>
 
      </div>
@@ -25,8 +25,10 @@
             <td colspan="2">
                 {if not $cust->isTypeAssociate()}
                     <span class="label label-{if $rsclient}success{else}important{/if}">RS Client</span>
-                    &nbsp;&nbsp;&nbsp;
-                    <span class="label label-{if $as112client}success{else}important{/if}">AS112</span>
+                    {if $as112UiActive}
+                        &nbsp;&nbsp;&nbsp;
+                        <span class="label label-{if $as112client}success{else}important{/if}">AS112</span>
+                    {/if}
                 {/if}
             </td>
         </tr>
@@ -62,29 +64,20 @@
             <tr>
                 <td><strong>PeeringDB</strong></td>
                 <td>
-                    {if $cust->getPeeringDb()}
+                    {if $cust->getPeeringDb() and isset( $options.peeringdb )}
                         <em>
                             <a onclick="$.colorbox({ldelim}href:&quot;{$options.peeringdb.url|replace:'%ID%':$cust->getPeeringDb()|replace:'%ASN%':$cust->getAutsys()}&quot;, iframe: true, width: &quot;75%&quot;, height: &quot;75%&quot;{rdelim});return false;">Click to view...</a>
                         </em>
                     {/if}
                 </td>
-                <td><strong>AS-SET</strong></td>
+                <td><strong>IPv4 AS-SET</strong></td>
                 <td>{$cust->getPeeringmacro()}</td>
             </tr>
             <tr>
                 <td><strong>IRRDB</strong></td>
                 <td>{if $cust->getIRRDB()}{$cust->getIRRDB()->getSource()}{/if}</td>
-                <td><strong>Max Prefixes</strong></td>
-                <td>
-                    {$cust->getMaxprefixes()}
-                    {if $cust->getVirtualInterfaces()|@count}
-                        ({foreach $cust->getVirtualInterfaces() as $vi}
-                            {foreach $vi->getVlanInterfaces() as $vli}
-                                {$vli->getMaxbgpprefix()}{if not ( $vi@last and $vli@last )}, {/if}
-                            {/foreach}
-                        {/foreach})
-                    {/if}
-                </td>
+                <td><strong>IPv6 AS-SET</strong></td>
+                <td>{$cust->getPeeringmacrov6()}</td>
             </tr>
         {/if}
         <tr>
@@ -98,8 +91,17 @@
                     {if $cust->getNoc24hphone()} {$cust->getNoc24hphone()} (24h) {/if}
                 {/if}
             </td>
-            <td></td>
-            <td></td>
+            <td><strong>Max Prefixes</strong></td>
+            <td>
+                {$cust->getMaxprefixes()}
+                {if $cust->getVirtualInterfaces()|@count}
+                    ({foreach $cust->getVirtualInterfaces() as $vi}
+                        {foreach $vi->getVlanInterfaces() as $vli}
+                            {$vli->getMaxbgpprefix()}{if not ( $vi@last and $vli@last )}, {/if}
+                        {/foreach}
+                    {/foreach})
+                {/if}
+            </td>
         </tr>
 
     </tbody>

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2011 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_Cabinet extends IXP_Form
@@ -36,7 +36,7 @@ class IXP_Form_Cabinet extends IXP_Form
     public function init()
     {
         $name = $this->createElement( 'text', 'name' );
-        $name->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $name->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setRequired( true )
             ->setAttrib( 'class', 'span3' )
             ->setLabel( 'Name' )
@@ -49,7 +49,7 @@ class IXP_Form_Cabinet extends IXP_Form
 
 
         $cololocation = $this->createElement( 'text', 'cololocation' );
-        $cololocation->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $cololocation->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setAttrib( 'class', 'span3' )
             ->setRequired( true )
             ->setLabel( 'Colo Location' )
@@ -59,7 +59,7 @@ class IXP_Form_Cabinet extends IXP_Form
 
         
         $type = $this->createElement( 'text', 'type' );
-        $type->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $type->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setAttrib( 'class', 'span3' )
             ->setRequired( false )
             ->setLabel( 'Type' )

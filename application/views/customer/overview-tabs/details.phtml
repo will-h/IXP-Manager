@@ -51,8 +51,10 @@
             <tr>
                 <th>Billing Period</th>
                 <td>
-                    {if isset( BillingDetails::$BILLING_FREQUENCIES[$bdetails->getBillingFrequency()] )}
-                        {BillingDetails::$BILLING_FREQUENCIES[$bdetails->getBillingFrequency()]}
+                    {if $bdetails->getBillingFrequency() != ''}
+                      {if isset( BillingDetails::$BILLING_FREQUENCIES[$bdetails->getBillingFrequency()] )}
+                          {BillingDetails::$BILLING_FREQUENCIES[$bdetails->getBillingFrequency()]}
+                      {/if}
                     {/if}
                 </td>
             </tr>
@@ -65,6 +67,7 @@
                 <td>
                     {if $bdetails->getBillingAddress1()}{$bdetails->getBillingAddress1()}<br/>{/if}
                     {if $bdetails->getBillingAddress2()}{$bdetails->getBillingAddress2()}<br/>{/if}
+                    {if $bdetails->getBillingAddress3()}{$bdetails->getBillingAddress3()}<br/>{/if}
                     {if $bdetails->getBillingTownCity()}{$bdetails->getBillingTownCity()}<br/>{/if}
                     {if $bdetails->getBillingPostcode()}{$bdetails->getBillingPostcode()}{/if}
                 </td>
@@ -84,8 +87,10 @@
             <tr>
                 <th>Invoice Method</th>
                 <td>
-                    {if isset( BillingDetails::$INVOICE_METHODS[$bdetails->getInvoiceMethod()] )}
-                        {BillingDetails::$INVOICE_METHODS[$bdetails->getInvoiceMethod()]}
+                    {if $bdetails->getInvoiceMethod() != ''}
+                      {if isset( BillingDetails::$INVOICE_METHODS[$bdetails->getInvoiceMethod()] )}
+                          {BillingDetails::$INVOICE_METHODS[$bdetails->getInvoiceMethod()]}
+                      {/if}
                     {/if}
                 </td>
             </tr>

@@ -2,7 +2,7 @@
 
 use Entities\CustomerNotes;
 /*
- * Copyright (C) 2009-2013 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -29,7 +29,7 @@ use Entities\CustomerNotes;
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Controller
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class CustomerNotesController extends IXP_Controller_AuthRequiredAction
@@ -91,7 +91,7 @@ class CustomerNotesController extends IXP_Controller_AuthRequiredAction
                 }
                 
                 // update the user's notes last read so he won't be told his own is new
-                $this->getUser()->setPreference( "customer-notes.{$this->getParam( 'custid' )}.last_read", mktime() );
+                $this->getUser()->setPreference( "customer-notes.{$this->getParam( 'custid' )}.last_read", time() );
                 
                 $this->getD2EM()->flush();
 
@@ -163,7 +163,7 @@ class CustomerNotesController extends IXP_Controller_AuthRequiredAction
         // update the last read for this user / customer combination
         if( is_numeric( $custid ) )
         {
-            $this->getUser()->setPreference( "customer-notes.{$custid}.last_read", mktime() );
+            $this->getUser()->setPreference( "customer-notes.{$custid}.last_read", time() );
             $this->getD2EM()->flush();
         }
     }

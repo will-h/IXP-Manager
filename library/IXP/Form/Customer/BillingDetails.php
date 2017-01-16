@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -27,7 +27,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_Customer_BillingDetails extends IXP_Form
@@ -35,7 +35,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
     public function init()
     {
         $billingContact = $this->createElement( 'text', 'billingContactName' );
-        $billingContact->addValidator( 'stringLength', false, array( 0, 64 ) )
+        $billingContact->addValidator( 'stringLength', false, array( 0, 64, 'UTF-8' ) )
             ->setRequired( false )
             ->setLabel( 'Contact' )
             ->addFilter( 'StringTrim' )
@@ -45,7 +45,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
         $this->addElement( $billingContact );
 
         $billingAddress1 = $this->createElement( 'text', 'billingAddress1' );
-        $billingAddress1->addValidator( 'stringLength', false, array( 0, 64 ) )
+        $billingAddress1->addValidator( 'stringLength', false, array( 0, 64, 'UTF-8' ) )
             ->setRequired( false )
             ->setLabel( 'Address' )
             ->setAttrib( 'class', 'span6' )
@@ -55,7 +55,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
         $this->addElement( $billingAddress1 );
 
         $billingAddress2 = $this->createElement( 'text', 'billingAddress2' );
-        $billingAddress2->addValidator( 'stringLength', false, array( 0, 64 ) )
+        $billingAddress2->addValidator( 'stringLength', false, array( 0, 64, 'UTF-8' ) )
             ->setRequired( false )
             ->setAttrib( 'class', 'span6' )
             ->setLabel( '' )
@@ -65,7 +65,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
         $this->addElement( $billingAddress2 );
 
         $billingAddress3 = $this->createElement( 'text', 'billingAddress3' );
-        $billingAddress3->addValidator( 'stringLength', false, array( 0, 64 ) )
+        $billingAddress3->addValidator( 'stringLength', false, array( 0, 64, 'UTF-8' ) )
             ->setRequired( false )
             ->setAttrib( 'class', 'span6' )
             ->setLabel( '' )
@@ -75,7 +75,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
         $this->addElement( $billingAddress3 );
 
         $billingCity = $this->createElement( 'text', 'billingTownCity' );
-        $billingCity->addValidator( 'stringLength', false, array( 0, 64 ) )
+        $billingCity->addValidator( 'stringLength', false, array( 0, 64, 'UTF-8' ) )
             ->setRequired( false )
             ->setAttrib( 'class', 'span4' )
             ->setLabel( 'City' )
@@ -85,7 +85,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
         $this->addElement( $billingCity );
 
         $billingPostcode = $this->createElement( 'text', 'billingPostcode' );
-        $billingPostcode->addValidator( 'stringLength', false, array( 0, 64 ) )
+        $billingPostcode->addValidator( 'stringLength', false, array( 0, 64, 'UTF-8' ) )
             ->setRequired( false )
             ->setAttrib( 'class', 'span4' )
             ->setLabel( 'Postcode' )
@@ -100,8 +100,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
             ->setValue( 'IE' )
             ->setLabel( 'Country' )
             ->setRequired( false )
-            ->setAttrib( 'class', 'chzn-select' )
-            ->setAttrib( 'chzn-fix-width', '1' );
+            ->setAttrib( 'class', 'chzn-select' );
 
 
         $this->addElement( $billingCountry );
@@ -118,7 +117,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
         $this->addElement( $billingEmail );
 
         $billingTelephone = $this->createElement( 'text', 'billingTelephone' );
-        $billingTelephone->addValidator( 'stringLength', false, array( 0, 64 ) )
+        $billingTelephone->addValidator( 'stringLength', false, array( 0, 64, 'UTF-8' ) )
             ->setRequired( false )
             ->setAttrib( 'class', 'span6' )
             ->setAttrib( 'placeholder', '+353 1 234 5678' )
@@ -131,7 +130,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
         /* Probably do not want to let the customer update this themselves...
 
             $vatNumber = $this->createElement( 'text', 'vatNumber' );
-            $vatNumber->addValidator( 'stringLength', false, array( 0, 64 ) )
+            $vatNumber->addValidator( 'stringLength', false, array( 0, 64, 'UTF-8' ) )
                 ->setRequired( false )
                 ->setAttrib( 'class', 'span6' )
                 ->setLabel( 'VAT Number' )
@@ -141,7 +140,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
             $this->addElement( $vatNumber );
 
             $vatRate = $this->createElement( 'text', 'vatRate' );
-            $vatRate->addValidator( 'stringLength', false, array( 0, 64 ) )
+            $vatRate->addValidator( 'stringLength', false, array( 0, 64, 'UTF-8' ) )
                 ->setRequired( false )
                 ->setAttrib( 'class', 'span4' )
                 ->setLabel( 'VAT Rate' )
@@ -167,7 +166,7 @@ class IXP_Form_Customer_BillingDetails extends IXP_Form
                 'billingPostcode', 'billingCountry', 'billingEmail', 'billingTelephone',
                 'invoiceEmail'
             ],
-        	'billingDisplayGroup'
+            'billingDisplayGroup'
         );
         $this->getDisplayGroup( 'billingDisplayGroup' )->setLegend( 'Billing Details' );
 

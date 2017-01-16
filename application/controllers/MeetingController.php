@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -22,18 +22,20 @@
  */
 
 
+use Carbon\Carbon;
+
 /**
  * Controller: Manage meetings
  *
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Controller
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class MeetingController extends IXP_Controller_FrontEnd
 {
-    
+
     /**
      * This function sets up the frontend controller
      */
@@ -43,32 +45,32 @@ class MeetingController extends IXP_Controller_FrontEnd
             'entity'        => '\\Entities\\Meeting',
             'form'          => 'IXP_Form_Meeting',
             'pagetitle'     => 'Meetings',
-        
+
             'titleSingular' => 'Meeting',
             'nameSingular'  => 'a meeting',
-        
+
             'listOrderBy'    => 'date',
             'listOrderByDir' => 'DESC'
         ];
-    
+
         switch( $this->getUser()->getPrivs() )
         {
             case \Entities\User::AUTH_SUPERUSER:
                 $this->_feParams->listColumns = [
                     'id'        => [ 'title' => 'UID', 'display' => false ],
-                    
+
                     'title'     => 'Title',
-        
+
                     'date'      => [
                         'title'     => 'Date',
                         'type'      => self::$FE_COL_TYPES[ 'DATE' ]
                     ],
-                    
+
                     'time'      => [
                         'title'     => 'Time',
                         'type'      => self::$FE_COL_TYPES[ 'TIME' ]
                     ],
-                    
+
                     'created_by'  => [
                         'title'      => 'Created By',
                         'type'       => self::$FE_COL_TYPES[ 'HAS_ONE' ],
@@ -77,22 +79,22 @@ class MeetingController extends IXP_Controller_FrontEnd
                         'idField'    => 'userid'
                     ]
                 ];
-    
+
                 $this->_feParams->defaultAction = 'list';
                 break;
-    
+
             case \Entities\User::AUTH_CUSTUSER:
                 $this->_feParams->allowedActions = [ 'read', 'rsvp', 'simple' ];
                 $this->_feParams->defaultAction = 'read';
                 break;
-    
+
             default:
                 $this->_feParams->allowedActions = [ 'simple' ];
                 $this->_feParams->defaultAction = 'simple';
                 break;
         }
     }
-    
+
     /**
      * Provide array of users for the listAction and viewAction
      *
@@ -109,16 +111,16 @@ class MeetingController extends IXP_Controller_FrontEnd
             )
             ->from( '\\Entities\\Meeting', 'm' )
             ->leftJoin( 'm.CreatedBy', 'u' );
-    
+
         if( isset( $this->_feParams->listOrderBy ) )
             $qb->orderBy( $this->_feParams->listOrderBy, isset( $this->_feParams->listOrderByDir ) ? $this->_feParams->listOrderByDir : 'ASC' );
-    
+
         if( $id !== null )
             $qb->andWhere( 'm.id = ?1' )->setParameter( 1, $id );
-    
+
         return $qb->getQuery()->getResult();
     }
-    
+
 
     /**
      * Preparation hook that can be overridden by subclasses for add and edit.
@@ -137,10 +139,10 @@ class MeetingController extends IXP_Controller_FrontEnd
             $form->getElement( 'date' )->setValue( $object->getDate()->format( 'Y-m-d' ) );
             $form->getElement( 'time' )->setValue( $object->getTime()->format( 'H:i' ) );
         }
-        
+
         return true;
     }
-    
+
     /**
      *
      * @param IXP_Form_Meeting $form The form object
@@ -152,17 +154,17 @@ class MeetingController extends IXP_Controller_FrontEnd
     {
         $object->setUpdatedBy( $this->getUser()->getId() );
         $object->setUpdatedAt( new DateTime() );
-        
+
         if( !$isEdit )
         {
             $object->setCreatedBy( $this->getUser() );
             $object->setCreatedAt( new DateTime() );
         }
-            
+
         return true;
     }
-    
-    
+
+
     /**
      *
      * @param IXP_Form_Meeting $form The form object
@@ -172,17 +174,17 @@ class MeetingController extends IXP_Controller_FrontEnd
      */
     protected function addPreFlush( $form, $object, $isEdit )
     {
-    
+
         if( !( $object->getDate() instanceof DateTime ) )
             $object->setDate( new DateTime( $form->getValue( 'date' ) ) );
-    
+
         if( !( $object->getTime() instanceof DateTime ) )
             $object->setTime( new DateTime( $form->getValue( 'time' ) ) );
-    
+
         return true;
     }
-    
-    
+
+
     public function readAction()
     {
         $this->view->entries = $this->getD2EM()->createQuery(
@@ -202,7 +204,7 @@ class MeetingController extends IXP_Controller_FrontEnd
                 'SELECT m, mi FROM \\Entities\\Meeting m LEFT JOIN m.MeetingItems mi ORDER BY m.date DESC, mi.other_content ASC'
             )
             ->execute();
-        
+
         $this->view->simple  = true;
 
         if( $this->getParam( 'nostyle', false ) )
@@ -290,7 +292,7 @@ class MeetingController extends IXP_Controller_FrontEnd
     public function composeAction()
     {
         $this->view->meeting = $meeting = $this->getD2EM()->getRepository( '\\Entities\\Meeting' )->find( $this->getParam( 'id' ) );
-        
+
         if( !$meeting )
         {
             $this->addMessage( "Invalid meeting selected", OSS_Message::ERROR );
@@ -300,27 +302,27 @@ class MeetingController extends IXP_Controller_FrontEnd
         do
         {
 
-	        if( $this->getParam( 'send', false ) )
-	        {
+            if( $this->getParam( 'send', false ) )
+            {
                 $this->view->to      = $this->getParam( 'to' );
                 $this->view->from    = $this->getParam( 'from' );
                 $this->view->bcc     = $this->getParam( 'bcc' );
                 $this->view->subject = trim( stripslashes( $this->getParam( 'subject' ) ) );
                 $this->view->body    = trim( stripslashes( $this->getParam( 'body' ) ) );
 
-	            foreach( array( 'to', 'from', 'bcc' ) as $p )
-	            {
-	                $v = trim( $this->_getParam( $p ) );
-	                $$p = $v;
+                foreach( array( 'to', 'from', 'bcc' ) as $p )
+                {
+                    $v = trim( $this->_getParam( $p ) );
+                    $$p = $v;
 
-	                if( $p == 'bcc' && $v == '' ) continue;
+                    if( $p == 'bcc' && $v == '' ) continue;
 
-	                if( !Zend_Validate::is( $v, 'EmailAddress' ) )
-	                {
-	                    $this->addMessage( "Invalid email address in the '$p' field", OSS_Message::ERROR );
-	                    break 2;
-	                }
-	            }
+                    if( !Zend_Validate::is( $v, 'EmailAddress' ) )
+                    {
+                        $this->addMessage( "Invalid email address in the '$p' field", OSS_Message::ERROR );
+                        break 2;
+                    }
+                }
 
                 $mail = $this->getMailer();
                 $mail->addTo( $to );
@@ -329,18 +331,17 @@ class MeetingController extends IXP_Controller_FrontEnd
                 $mail->setSubject( trim( stripslashes( $this->getParam( 'subject' ) ) ) );
                 $mail->setBodyHtml( $this->view->render( 'meeting/email/meeting.phtml' ), 'utf8' );
 
-	            try {
-	                $mail->send();
-	                $this->addMessage( "Email sent successfully", OSS_Message::SUCCESS );
-	            } catch( Zend_Mail_Exception $e ) {
+                try {
+                    $mail->send();
+                    $this->addMessage( "Email sent successfully", OSS_Message::SUCCESS );
+                } catch( Zend_Mail_Exception $e ) {
                     $thisaddMessage( "Error: Could not send email.", OSS_Message::ERROR );
-	                $this->getLogger()->err( $e->getMessage() );
-	            }
+                    $this->getLogger()->err( $e->getMessage() );
+                }
 
-	        }
+            }
 
         }while( false );
     }
 
 }
-

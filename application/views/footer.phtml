@@ -5,23 +5,17 @@
     </div><!--/row-->
 {/if}
 
-{if $smarty.const.MAINTENANCE_MODE}
-    <div class="alert alert-info" style="text-align: center;">
-        <strong>*** MAINTENANCE MODE ENABLED ***</strong>
-    </div>
-{/if}
-
 {tmplinclude file='footer-content.phtml'}
 
 {if !isset( $mode ) or $mode neq 'fluid'}
-    
+
     </div> <!-- </div class="container"> -->
 
 {/if}
 
 {if isset( $hasIdentity ) and $hasIdentity}
 <script>
-    $( ".chzn-select" ).chosen();
+    $( ".chzn-select" ).chosen( { width: '100%' } );
 
     {if isset( $user ) and $user->getPrivs() eq 3}
         $( "#menu-select-customer" ).chosen().change( function(){
@@ -30,7 +24,7 @@
 
         {if isset( $acust )}
             $( "#menu-select-customer" ).val( {$acust.id} );
-            $( "#menu-select-customer" ).trigger( "liszt:updated" );
+            $( "#menu-select-customer" ).trigger( "chosen:updated" );
         {/if}
     {/if}
 </script>

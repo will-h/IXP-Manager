@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Controller
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class LocationController extends IXP_Controller_FrontEnd
@@ -92,7 +92,7 @@ class LocationController extends IXP_Controller_FrontEnd
                 'l.id AS id, l.name AS name, l.shortname AS shortname, l.tag AS tag,
                 l.nocphone AS nocphone, l.nocemail AS nocemail, l.address AS address,
                 l.nocfax AS nocfax, l.officephone AS officephone, l.officefax AS officefax,
-                l.officeemail AS officeemail, l.notes AS notes'
+                l.officeemail AS officeemail, l.notes AS notes, l.pdb_facility_id AS pdb_facility_id'
             )
         ->from( '\\Entities\\Location', 'l' );
 
@@ -105,6 +105,12 @@ class LocationController extends IXP_Controller_FrontEnd
         return $qb->getQuery()->getResult();
     }
 
+    public function getPeeringDbFacilitiesAction()
+    {
+        Zend_Controller_Action_HelperBroker::removeHelper( 'viewRenderer' );
+        $this->getResponse()->setHeader( 'Content-Type', 'application/json' );
+        echo file_get_contents( 'https://api.peeringdb.com/api/fac' );
+    }
     /**
      * Function which can be over-ridden to perform any pre-deletion tasks
      *

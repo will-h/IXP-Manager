@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_Profile extends IXP_Form
@@ -42,7 +42,7 @@ class IXP_Form_Profile extends IXP_Form
             ->setAction( OSS_Utils::genUrl( 'profile', 'change-profile' ) );
 
         $name = $this->createElement( 'text', 'name' );
-        $name->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $name->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setRequired( true )
             ->setLabel( 'Name' )
             ->setAttrib( 'class', 'span6' )
@@ -52,7 +52,7 @@ class IXP_Form_Profile extends IXP_Form
         $this->addElement( $name );
 
         $position = $this->createElement( 'text', 'position' );
-        $position->addValidator( 'stringLength', false, array( 1, 50 ) )
+        $position->addValidator( 'stringLength', false, array( 1, 50, 'UTF-8' ) )
             ->setRequired( true )
             ->setLabel( 'Position' )
             ->setAttrib( 'class', 'span6' )
@@ -70,7 +70,7 @@ class IXP_Form_Profile extends IXP_Form
         $this->addElement( $mobile );
 
         $phone = $this->createElement( 'text', 'phone' );
-        $phone->addValidator( 'stringLength', false, array( 1, 32 ) )
+        $phone->addValidator( 'stringLength', false, array( 1, 32, 'UTF-8' ) )
             ->setLabel( _( 'Phone' ) )
             ->setAttrib( 'class', 'span6' )
             ->addFilter( 'StringTrim' )

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2011 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Controller
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IndexController extends IXP_Controller_Action
@@ -52,11 +52,11 @@ class IndexController extends IXP_Controller_Action
         $this->view->display( 'index/controller-disabled.tpl' );
     }
 
-    public function aboutAction()
-    {
-        $this->view->apachever = str_replace("Apache/", "", $_SERVER['SERVER_SOFTWARE']);
-        $this->view->phpver    = phpversion();
-        $this->view->dbver     = $this->getD2EM()->getConnection()->query( "SELECT VERSION() AS V" )->fetch()['V'];
+    public function testAction() {
+        echo '<pre>';
+        echo OSS_Utils::genUrl();
+        echo "\n\n\n";
+        print_r($_SERVER);
+        die();
     }
-
 }

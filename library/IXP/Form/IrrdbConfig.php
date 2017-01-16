@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2011 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_IrrdbConfig extends IXP_Form
@@ -36,7 +36,7 @@ class IXP_Form_IrrdbConfig extends IXP_Form
     public function init()
     {
         $host = $this->createElement( 'text', 'host' );
-        $host->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $host->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setRequired( true )
             ->setLabel( 'Host' )
             ->setAttrib( 'class', 'span3' )
@@ -45,7 +45,7 @@ class IXP_Form_IrrdbConfig extends IXP_Form
         $this->addElement( $host );
 
         $protocol = $this->createElement( 'text', 'protocol' );
-        $protocol->addValidator( 'stringLength', false, array( 1, 10 ) )
+        $protocol->addValidator( 'stringLength', false, array( 1, 10, 'UTF-8' ) )
             ->setRequired( true )
             ->setLabel( 'Protocol' )
             ->setAttrib( 'class', 'span3' )
@@ -54,7 +54,7 @@ class IXP_Form_IrrdbConfig extends IXP_Form
         $this->addElement( $protocol );
 
         $source = $this->createElement( 'text', 'source' );
-        $source->addValidator( 'stringLength', false, array( 1, 50 ) )
+        $source->addValidator( 'stringLength', false, array( 1, 50, 'UTF-8' ) )
             ->setRequired( true )
             ->setLabel( 'Source' )
             ->setAttrib( 'class', 'span3' )

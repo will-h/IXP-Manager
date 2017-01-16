@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Controller
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class VlanController extends IXP_Controller_FrontEnd
@@ -90,7 +90,7 @@ class VlanController extends IXP_Controller_FrontEnd
                     'xlator'         => \Entities\Vlan::$PRIVATE_YES_NO
                 ],
 
-                'notes' => 'Notes' 
+                'notes' => 'Notes'
             ]
         );
     }
@@ -185,7 +185,7 @@ class VlanController extends IXP_Controller_FrontEnd
     protected function postFlush( $object )
     {
         // this is created in Repositories\Vlan::getNames()
-        $this->getD2Cache()->delete( \Repositories\Vlan::ALL_CACHE_KEY );
+        Cache::forget( \Repositories\Vlan::ALL_CACHE_KEY );
         return true;
     }
 

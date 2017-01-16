@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Controller
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class UtilsController extends IXP_Controller_AuthRequiredAction
@@ -40,31 +40,12 @@ class UtilsController extends IXP_Controller_AuthRequiredAction
             return $this->forward( 'insufficient-permissions', 'error' );
     }
 
-
-    /**
-     * Display apcinfo()
-     */
-    public function apcinfoAction()
-    {}
-
-    /**
-     * Display apcinfo()
-     */
-    public function realApcinfoAction()
-    {
-        Zend_Controller_Action_HelperBroker::removeHelper( 'viewRenderer' );
-        @ob_end_clean();
-        $BU = Zend_Controller_Front::getInstance()->getBaseUrl() . '/utils/apcinfo';
-        require( APPLICATION_PATH . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'apcinfo.php' );
-    }
-    
-    
     /**
      * Display phpinfo
      */
     public function phpinfoAction()
     {}
-    
+
     /**
      * Display real phpinfo()
      */
@@ -75,4 +56,3 @@ class UtilsController extends IXP_Controller_AuthRequiredAction
         phpinfo();
     }
 }
-

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -27,7 +27,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_ConsoleServerConnection extends IXP_Form
@@ -35,7 +35,7 @@ class IXP_Form_ConsoleServerConnection extends IXP_Form
     public function init()
     {
         $description = $this->createElement( 'text', 'description' );
-        $description->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $description->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setRequired( true )
             ->setAttrib( 'class', 'span3' )
             ->setLabel( 'Description' )
@@ -48,7 +48,7 @@ class IXP_Form_ConsoleServerConnection extends IXP_Form
         $this->addElement( IXP_Form_Switch::getPopulatedSelect( 'switchid', \Entities\Switcher::TYPE_CONSOLESERVER ) );
         
         $port = $this->createElement( 'text', 'port' );
-        $port->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $port->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setRequired( true )
             ->setLabel( 'Port' )
             ->setAttrib( 'class', 'span3' )

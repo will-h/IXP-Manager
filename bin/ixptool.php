@@ -2,7 +2,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2013 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -30,45 +30,23 @@
  *
  * Barry O'Donovan <barryo@inex.ie>
  *
- * http://www.inex.ie/
- * (c) Copyright 2009 - 2013 Internet Neutral Exchange Association Ltd (INEX)
- *
  */
 
-date_default_timezone_set( 'Europe/Dublin' );
-require_once( dirname( __FILE__ ) . '/utils.inc' );
-define( 'APPLICATION_ENV', scriptutils_get_application_env() );
+require __DIR__.'/../bootstrap/autoload.php';
+$app = require_once __DIR__.'/../bootstrap/app.php';
+$kernel = $app->make('Illuminate\Contracts\Console\Kernel');
+$kernel->bootstrap();
 
 define( 'SCRIPT_NAME', 'ixptool - IXP Manager CLI Management Tool' );
-define( 'SCRIPT_COPY', '(c) Copyright 2010 - ' . date( 'Y' ) . ' Internet Neutral Exchange Association Ltd' );
+define( 'SCRIPT_COPY', 'Copyright (c) 2010 - ' . date( 'Y' ) . ' Internet Neutral Exchange Association Company Limited By Guarantee' );
 
 error_reporting( E_ALL|E_STRICT );
 
 ini_set( 'display_errors', true );
 
-defined( 'APPLICATION_PATH' ) || define( 'APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application' ) );
-
-// Ensure library/ is on include_path
-set_include_path( implode( PATH_SEPARATOR,
-        array(
-            realpath( APPLICATION_PATH . '/../library' ),
-            get_include_path()
-        )
-    )
-);
-
-/** Zend_Application */
-require_once 'Zend/Application.php';
-
-// Create application, bootstrap, and run
-$application = new Zend_Application(
-    APPLICATION_ENV,
-    APPLICATION_PATH . '/configs/application.ini'
-);
+$application = $app->make('ZendFramework');
 
 try {
-    $application->bootstrap();
-
     $bootstrap = $application->getBootstrap();
     $bootstrap->bootstrap( 'frontController' );
 }
@@ -99,15 +77,14 @@ catch( Zend_Console_Getopt_Exception $e )
     exit( $e->getMessage() ."\n\n". $e->getUsageMessage() );
 }
 
-if( !isset( $opts->f ) && file_exists( '../MAINT_MODE_ENABLED' ) )
-{
+if( !isset( $opts->f ) && $app->isDownForMaintenance() ) {
     die( "IXPtool - CLI tool exiting as maintenance mode is enabled. Use -f to force.\n" );
 }
-    
+
 if( isset( $opts->h ) )
 {
     echo SCRIPT_NAME . "\n" . SCRIPT_COPY . "\n\n";
-    
+
     echo $opts->getUsageMessage();
     exit;
 }
@@ -149,7 +126,7 @@ if( isset( $opts->a ) )
                 $param = explode( "=", $opts->p );
                 $front->getRequest()->setParam( trim( $param[0] ), trim( $param[1] ) );
             }
-            
+
         }
 
         $front->setParam( 'noViewRenderer', true )
@@ -185,4 +162,3 @@ if( isset( $opts->a ) )
         }
     }
 }
-

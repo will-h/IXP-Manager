@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2013 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -29,7 +29,7 @@
  * @author     Nerijus Barauskas <nerijus@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Controller
- * @copyright  Copyright (c) 2009 - 2013, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class InfrastructureController extends IXP_Controller_FrontEnd
@@ -234,8 +234,8 @@ class InfrastructureController extends IXP_Controller_FrontEnd
     protected function postFlush( $object )
     {
         // wipe cached entries
-        $this->getD2Cache()->delete( \Repositories\Infrastructure::CACHE_KEY_PRIMARY . $object->getId() );
-        $this->getD2Cache()->delete( \Repositories\Infrastructure::CACHE_KEY_ALL     . $object->getId() );
+        Cache::forget( \Repositories\Infrastructure::CACHE_KEY_PRIMARY . $object->getId() );
+        Cache::forget( \Repositories\Infrastructure::CACHE_KEY_ALL     . $object->getId() );
         return true;
     }
     
@@ -264,4 +264,3 @@ class InfrastructureController extends IXP_Controller_FrontEnd
     }
     
 }
-

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2011 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  * 
  * This file is part of IXP Manager.
@@ -19,14 +19,6 @@
  * along with IXP Manager.  If not, see:
  * 
  * http://www.gnu.org/licenses/gpl-2.0.html
- */
-
-
-/*
- *
- *
- * http://www.inex.ie/
- * (c) Internet Neutral Exchange Association Ltd
  */
 
 /**
@@ -63,7 +55,7 @@ class IXP_Form_SubForm_PatchPanelPort extends IXP_Form_SubForm
         $this->addElement( $side );
 
         $colo_ref = $this->createElement( 'text', 'colo_ref' );
-        $colo_ref->addValidator( 'stringLength', false, array( 1, 255 ) )
+        $colo_ref->addValidator( 'stringLength', false, array( 1, 255, 'UTF-8' ) )
             ->setAttrib('size', 40 )
             ->setAttrib('maxlength', 255)
             ->setRequired( true )

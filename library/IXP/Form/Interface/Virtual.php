@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_Interface_Virtual extends IXP_Form
@@ -42,7 +42,7 @@ class IXP_Form_Interface_Virtual extends IXP_Form
         $this->getElement( 'custid' )->setAttrib( 'class', 'chzn-select span8' );
 
         $name = $this->createElement( 'text', 'name' );
-        $name->addValidator( 'stringLength', false, array( 0, 255 ) )
+        $name->addValidator( 'stringLength', false, array( 0, 255, 'UTF-8' ) )
             ->setRequired( false )
             ->setLabel( 'Virtual Interface Name' )
             ->addFilter( 'StringTrim' )
@@ -52,7 +52,7 @@ class IXP_Form_Interface_Virtual extends IXP_Form
 
         $descr = $this->createElement( 'text', 'description' );
         $descr->setLabel( 'Description' )
-            ->addValidator( 'stringLength', false, array( 0, 255 ) )
+            ->addValidator( 'stringLength', false, array( 0, 255, 'UTF-8' ) )
             ->setRequired( false )
             ->addFilter( new OSS_Filter_StripSlashes() )
             ->addFilter( 'StringTrim' );

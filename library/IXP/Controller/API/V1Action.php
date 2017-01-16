@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2013 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -97,8 +97,9 @@ class IXP_Controller_API_V1Action extends OSS_Controller_Action
         {
             try
             {
-                if( !( $apiKey = $this->getParam( 'key', false ) ) )
+                if( !( $apiKey = $this->getParam( 'key', false ) ) ) {
                     return false;
+                }
 
                 $key = $this->getD2EM()->createQuery(
                         "SELECT a FROM \\Entities\\ApiKey a WHERE a.apiKey = ?1" )

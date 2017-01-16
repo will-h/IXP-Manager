@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Controller
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class VirtualInterfaceController extends IXP_Controller_FrontEnd
@@ -126,7 +126,7 @@ class VirtualInterfaceController extends IXP_Controller_FrontEnd
             ->leftJoin( 'sp.Switcher', 's' )
             ->leftJoin( 's.Cabinet', 'cab' )
             ->leftJoin( 'cab.Location', 'l' )
-            ->groupBy( 'vi' );
+            ->groupBy( 'vi, ppid, fpid, speed, ports' );
 
         return $qb->getQuery()->getArrayResult();
     }
@@ -195,11 +195,12 @@ class VirtualInterfaceController extends IXP_Controller_FrontEnd
         {
             $form->getElement( 'custid' )->setValue( $object->getCustomer()->getId() );
 
-            $this->view->ptypes   = \Entities\SwitchPort::$TYPES;
-            $this->view->cust     = $object->getCustomer();
-            $this->view->physInts = $object->getPhysicalInterfaces();
-            $this->view->vlanInts = $object->getVlanInterfaces();
-            $this->view->type     = $object->getType();
+            $this->view->ptypes         = \Entities\SwitchPort::$TYPES;
+            $this->view->cust           = $object->getCustomer();
+            $this->view->physInts       = $object->getPhysicalInterfaces();
+            $this->view->vlanInts       = $object->getVlanInterfaces();
+            $this->view->sflowReceivers = $object->getSflowReceivers();
+            $this->view->type           = $object->getType();
         }
     }
 

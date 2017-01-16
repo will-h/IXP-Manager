@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2009-2012 Internet Neutral Exchange Association Limited.
+ * Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee.
  * All Rights Reserved.
  *
  * This file is part of IXP Manager.
@@ -28,7 +28,7 @@
  * @author     Barry O'Donovan <barry@opensolutions.ie>
  * @category   IXP
  * @package    IXP_Form
- * @copyright  Copyright (c) 2009 - 2012, Internet Neutral Exchange Association Ltd
+ * @copyright  Copyright (C) 2009-2016 Internet Neutral Exchange Association Company Limited By Guarantee
  * @license    http://www.gnu.org/licenses/gpl-2.0.html GNU GPL V2.0
  */
 class IXP_Form_Interface_Vlan extends IXP_Form
@@ -60,14 +60,15 @@ class IXP_Form_Interface_Vlan extends IXP_Form
         $this->addElement( $ipv4addressid );
 
         $ipv4hostname = $this->createElement( 'text', 'ipv4hostname' );
-        $ipv4hostname->addValidator( 'stringLength', false, array( 1, 64 ) )
+        $ipv4hostname->addValidator( 'stringLength', false, array( 1, 64, 'UTF-8' ) )
+            ->addValidator( 'hostname', false, [ 'allow' => Zend_Validate_Hostname::ALLOW_DNS ] )
             ->setLabel( 'IPv4 Hostname' )
             ->addFilter( 'StringTrim' )
             ->addFilter( new OSS_Filter_StripSlashes() );
         $this->addElement( $ipv4hostname  );
 
         $ipv4bgpmd5secret = $this->createElement( 'text', 'ipv4bgpmd5secret' );
-        $ipv4bgpmd5secret->addValidator( 'stringLength', false, array( 1, 64 ) )
+        $ipv4bgpmd5secret->addValidator( 'stringLength', false, array( 1, 64, 'UTF-8' ) )
             ->setLabel( 'IPv4 BGP MD5 Secret' )
             ->addFilter( 'StringTrim' )
             ->addFilter( new OSS_Filter_StripSlashes() );
@@ -105,14 +106,15 @@ class IXP_Form_Interface_Vlan extends IXP_Form
         $this->addElement( $ipv6addressid );
 
         $ipv6hostname = $this->createElement( 'text', 'ipv6hostname' );
-        $ipv6hostname->addValidator( 'stringLength', false, array( 1, 64 ) )
+        $ipv6hostname->addValidator( 'stringLength', false, array( 1, 64, 'UTF-8' ) )
+            ->addValidator( 'hostname', false, [ 'allow' => Zend_Validate_Hostname::ALLOW_DNS ] )
             ->setLabel( 'IPv6 Hostname' )
             ->addFilter( 'StringTrim' )
             ->addFilter( new OSS_Filter_StripSlashes() );
         $this->addElement( $ipv6hostname  );
 
         $ipv6bgpmd5secret = $this->createElement( 'text', 'ipv6bgpmd5secret' );
-        $ipv6bgpmd5secret->addValidator( 'stringLength', false, array( 1, 64 ) )
+        $ipv6bgpmd5secret->addValidator( 'stringLength', false, array( 1, 64, 'UTF-8' ) )
             ->setLabel( 'IPv6 BGP MD5 Secret' )
             ->addFilter( 'StringTrim' )
             ->addFilter( new OSS_Filter_StripSlashes() );

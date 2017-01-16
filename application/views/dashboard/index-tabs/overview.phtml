@@ -2,28 +2,36 @@
 <div class="row-fluid">
 
     <div class="span6">
-        <h3>Aggregate Peering Statistics</h3>
-        
+        <h3>
+            Aggregate Peering Statistics
+            {if not $multiIXP}
+                <a class="btn" href="{genUrl controller="statistics" action="member-drilldown" shortname=$user->getCustomer()->getShortname() category='bits' monitorindex='aggregate'}">
+                    <i class="icon-eye-open"></i>
+                </a>
+            {/if}
+        </h3>
+
         {if $multiIXP}
             {foreach $cust->getIXPs() as $ixp}
                 <br />
                 <div class="well">
-                    <h3>{$ixp->getName()}</h3>
-                	<a href="{genUrl controller="statistics" action="member-drilldown" ixp=$ixp->getId() shortname=$cust->getShortname() category='bits' monitorindex='aggregate'}">
-                        {genMrtgImgUrlTag ixp=$ixp->getId() shortname=$cust->getShortname() category='bits' monitorindex='aggregate'}
-                    </a>
+                    <h3>
+                        {$ixp->getName()}
+                        <a class="btn" href="{genUrl controller="statistics" action="member-drilldown" ixp=$ixp->getId() shortname=$cust->getShortname() category='bits' monitorindex='aggregate'}">
+                            <i class="icon-eye-open"></i>
+                        </a>
+                    </h3>
+                    FIXME
                 </div>
             {/foreach}
         {else}
             <br />
             <div class="well">
-            	<a href="{genUrl controller="statistics" action="member-drilldown" shortname=$user->getCustomer()->getShortname() category='bits' monitorindex='aggregate'}">
-                    {genMrtgImgUrlTag shortname=$user->getCustomer()->getShortname() category='bits' monitorindex='aggregate'}
-                </a>
+                {$grapher->customer($cust)->renderer()->boxLegacy()}
             </div>
         {/if}
     </div>
-    
+
     <div class="span6">
 
         <h3>Recent Members</h3>
@@ -61,6 +69,30 @@
 
     </div>
 </div>
-        
+
+{if $logoManagementActive}
+    <div class="row-fluid">
+        <h3>Your Logo</h3>
+
+        {if $cust->getLogo('WWW80')}
+            <div class="span3">
+                The logo we have for you is shown here.
+                Please <a href="{genUrl controller="customer" action="manage-logo"}">click here</a>
+                to change it.
+            </div>
+            <div class="span3">
+                <img class="www80-padding" src="{genUrl}/logos/{$cust->getLogo('WWW80')->getShardedPath()}" />
+            </div>
+        {else}
+            <p>
+                You have not uploaded a logo which means it is not currently displayed on our public
+                website. Please <a href="{genUrl controller="customer" action="manage-logo"}">click here</a>
+                to add one now.
+            </p>
+        {/if}
+    </div>
+{/if}
+
+
+
 {tmplinclude file="dashboard/index-tabs/overview-news.phtml"}
-        
