@@ -237,7 +237,7 @@ sub process_graphite_update {
 								"\n";
 						if ($out > 0) {
 							# forget update if it is 0. this is a bit faulty, but does stop us creating a lot of worthless files for now
-							$gsend->{$tv}->{p2p}->{$ipprotocol}->{$rrdtype}->{$srcvli}->{$dstvli} = $out
+							$gsend->{$tv}->{p2p}->{$ipprotocol}->{$rrdtype}->{$srcvli}->{$dstvli} = $out / $interval;
 						}
 						# build_update_rrd ($rrdfile, $rrdtype, $ipprotocol, $in, $out, $interval, $rrdcached);
 					}
@@ -263,8 +263,8 @@ sub process_graphite_update {
 					# build_update_rrd ($rrdfile, $rrdtype, $ipprotocol, $in, $out, $interval, $rrdcached);
 					if ($out + $in > 0) {
 						# forget update if it is 0. this is a bit faulty, but does stop us creating a lot of worthless files for now
-						$gsend->{$tv}->{individual}->{$ipprotocol}->{$rrdtype}->{$srcvli}->{in} = $in;
-						$gsend->{$tv}->{individual}->{$ipprotocol}->{$rrdtype}->{$srcvli}->{out} = $out;
+						$gsend->{$tv}->{individual}->{$ipprotocol}->{$rrdtype}->{$srcvli}->{in} = $in / $interval;
+						$gsend->{$tv}->{individual}->{$ipprotocol}->{$rrdtype}->{$srcvli}->{out} = $out / $interval;
 					}
 				}
 
@@ -277,8 +277,8 @@ sub process_graphite_update {
 
 				if ($out + $in > 0) {
 					# forget update if it is 0. this is a bit faulty, but does stop us creating a lot of worthless files for now
-					$gsend->{$tv}->{aggregate}->{$ipprotocol}->{$rrdtype}->{$vlan}->{in} = $in;
-					$gsend->{$tv}->{aggregate}->{$ipprotocol}->{$rrdtype}->{$vlan}->{out} = $out;
+					$gsend->{$tv}->{aggregate}->{$ipprotocol}->{$rrdtype}->{$vlan}->{in} = $in / $interval;
+					$gsend->{$tv}->{aggregate}->{$ipprotocol}->{$rrdtype}->{$vlan}->{out} = $out / $interval;
 				}
 				#build_update_rrd ($rrdfile, $rrdtype, $ipprotocol, $in, $out, $interval, $rrdcached);
 			}
