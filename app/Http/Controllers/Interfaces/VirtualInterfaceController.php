@@ -278,7 +278,7 @@ class VirtualInterfaceController extends Common
         }
 
         if( $vi->physicalInterfaces()->count() > 1 && $vi->channelgroup && !$r->channelgroup ) {
-            AlertContainer::push( 'You cannot remove a channel group number when there are multiple phsyical interfaces.', Alert::DANGER );
+            AlertContainer::push( 'You cannot remove a channel group number when there are multiple physical interfaces.', Alert::DANGER );
             return redirect( route( 'virtual-interface@edit', [ 'vi' => $vi->id ] ) )->withInput()->exceptInput( 'channelgroup' );
         }
 
