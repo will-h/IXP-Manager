@@ -83,7 +83,7 @@
                         ->label( '&nbsp;' )
                         ->text( 'Link aggregation / LAG framing' )
                         ->inline()
-                        ->blockHelp( 'Indicates if operators / provisioning systems should enable LAG framing such as LACP. <br/><br/>Mandatory where there is more than one phsyical interface.<br/><br/> Otherwise optional where a member requests a single member LAG for ease of upgrades.' )
+                        ->blockHelp( 'Indicates if operators / provisioning systems should enable LAG framing such as LACP. <br/><br/>Mandatory where there is more than one physical interface.<br/><br/> Otherwise optional where a member requests a single member LAG for ease of upgrades.' )
                         ->value( 1 );
                     ?>
 
